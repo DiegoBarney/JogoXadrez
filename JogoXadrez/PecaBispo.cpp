@@ -146,7 +146,7 @@ bool PecaBispo::validarJogadaBispoCapturaDireita(char** tabuleiroBackEnd) {
 	//VALIDACAO DIAGONAL DIREITA ACIMA
 	for (int linha = globalLinhaPonteiro, coluna = globalColunaPonteiro, sairLoopEncadeado = false; linha >= 0 && coluna < COLUNAS && sairLoopEncadeado == false; linha--, coluna++) {
 
-		if (validarJogadaCorretaCaptura(tabuleiroBackEnd, linha, coluna)) {
+		if (validarJogadaCorretaCaptura()) {
 
 			linhaPecaInimiga = linha;
 			colunaPecaInimiga = coluna;
@@ -185,7 +185,7 @@ bool PecaBispo::validarJogadaBispoCapturaDireita(char** tabuleiroBackEnd) {
 	//VALIDACAO DIAGONAL DIREITA A BAIXO
 	for (int linha = globalLinhaPonteiro, coluna = globalColunaPonteiro, sairLoopEncadeado = false; linha < LINHAS && coluna < COLUNAS && sairLoopEncadeado == false; linha++, coluna++) {
 
-		if (validarJogadaCorretaCaptura(tabuleiroBackEnd, linha, coluna)) {
+		if (validarJogadaCorretaCaptura()) {
 
 			linhaPecaInimiga = linha;
 			colunaPecaInimiga = coluna;
@@ -232,7 +232,7 @@ bool PecaBispo::validarJogadaBispoCapturaEsquerda(char** tabuleiroBackEnd) {
 	//VALIDACAO DIAGONAL ESQUERDA ACIMA
 	for (int linha = globalLinhaPonteiro, coluna = globalColunaPonteiro, sairLoopEncadeado = false; linha >= 0 && coluna >= 0 && sairLoopEncadeado == false; linha--, coluna--) {
 
-		if (validarJogadaCorretaCaptura(tabuleiroBackEnd, linha, coluna)) {
+		if (validarJogadaCorretaCaptura()) {
 
 			linhaPecaInimiga = linha;
 			colunaPecaInimiga = coluna;
@@ -269,7 +269,7 @@ bool PecaBispo::validarJogadaBispoCapturaEsquerda(char** tabuleiroBackEnd) {
 	//VALIDACAO DIAGONAL ESQUERDA A BAIXO
 	for (int linha = globalLinhaPonteiro, coluna = globalColunaPonteiro, sairLoopEncadeado = false; linha < LINHAS && coluna >= 0 && sairLoopEncadeado == false; linha++, coluna--) {
 
-		if (validarJogadaCorretaCaptura(tabuleiroBackEnd, linha, coluna)) {
+		if (validarJogadaCorretaCaptura()) {
 
 			linhaPecaInimiga = linha;
 			colunaPecaInimiga = coluna;
@@ -309,16 +309,16 @@ bool PecaBispo::validarJogadaBispoCapturaEsquerda(char** tabuleiroBackEnd) {
 	return false;
 }
 
-bool PecaBispo::validarJogadaCorretaCaptura(char** tabuleiroBackEnd, int linha, int coluna) {
+bool PecaBispo::validarJogadaCorretaCaptura() {
 
 			//JOGADA DO BISPO BRANCO
-	if ( ( (tabuleiroBackEnd[linha][coluna] == PECA_PRETA_TORRE || tabuleiroBackEnd[linha][coluna] == PECA_PRETA_CAVALO || tabuleiroBackEnd[linha][coluna] == PECA_PRETA_BISPO ||
-			tabuleiroBackEnd[linha][coluna] == PECA_PRETA_RAINHA || tabuleiroBackEnd[linha][coluna] == PECA_PRETA_REI || tabuleiroBackEnd[linha][coluna] == PECA_PRETA_PIAO)
+	if ( ( (globalPecaBackupDoPonteiro == PECA_PRETA_TORRE || globalPecaBackupDoPonteiro == PECA_PRETA_CAVALO || globalPecaBackupDoPonteiro == PECA_PRETA_BISPO ||
+			globalPecaBackupDoPonteiro == PECA_PRETA_RAINHA || globalPecaBackupDoPonteiro == PECA_PRETA_REI || globalPecaBackupDoPonteiro == PECA_PRETA_PIAO)
 			&& globalPecaSelecionada == PECA_BRANCA_BISPO ) ||
 
 			//JOGADA DO BISPO PRETO
-		( (	tabuleiroBackEnd[linha][coluna] == PECA_BRANCA_TORRE || tabuleiroBackEnd[linha][coluna] == PECA_BRANCA_CAVALO || tabuleiroBackEnd[linha][coluna] == PECA_BRANCA_BISPO ||
-			tabuleiroBackEnd[linha][coluna] == PECA_BRANCA_RAINHA || tabuleiroBackEnd[linha][coluna] == PECA_BRANCA_REI || tabuleiroBackEnd[linha][coluna] == PECA_BRANCA_PIAO)
+		( ( globalPecaBackupDoPonteiro == PECA_BRANCA_TORRE || globalPecaBackupDoPonteiro == PECA_BRANCA_CAVALO || globalPecaBackupDoPonteiro == PECA_BRANCA_BISPO ||
+			globalPecaBackupDoPonteiro == PECA_BRANCA_RAINHA || globalPecaBackupDoPonteiro == PECA_BRANCA_REI || globalPecaBackupDoPonteiro == PECA_BRANCA_PIAO)
 			&& globalPecaSelecionada == PECA_PRETA_BISPO ) ) {
 
 		return true;

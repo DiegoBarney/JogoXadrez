@@ -14,5 +14,5 @@ private:
 	bool validarJogadaBispoCaptura(char** tabuleiroBackEnd);
 	bool validarJogadaBispoCapturaDireita(char** tabuleiroBackEnd);
 	bool validarJogadaBispoCapturaEsquerda(char** tabuleiroBackEnd);
-	bool validarJogadaCorretaCaptura(char** tabuleiroBackEnd, int linha, int coluna);
+	bool validarJogadaCorretaCaptura();
 };
