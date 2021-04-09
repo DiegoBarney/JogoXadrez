@@ -28,12 +28,13 @@ void soltaPecaAposValidacoes(char** tabuleiroBackEnd) {
 
 void PecaBispo::jogarComBispo(char** tabuleiroBackEnd) {
 
-	if (validarJogadaBispo(tabuleiroBackEnd) == true)
+	if (globalPecaBackupDoPonteiro == VAZIO)
 	{
-		return;
+		validarJogadaBispo(tabuleiroBackEnd);
 	}
-
-	 validarJogadaBispoCaptura(tabuleiroBackEnd);
+	else {
+		validarJogadaBispoCaptura(tabuleiroBackEnd);
+	}
 }
 
 bool PecaBispo::validarJogadaBispo(char** tabuleiroBackEnd) {
@@ -129,12 +130,8 @@ bool PecaBispo::validarJogadaBispoEsquerda(char** tabuleiroBackEnd) {
 
 bool PecaBispo::validarJogadaBispoCaptura(char** tabuleiroBackEnd) {
 
-	if (validarJogadaBispoCapturaDireita(tabuleiroBackEnd) == true)
+	if (!validarJogadaBispoCapturaDireita(tabuleiroBackEnd))
 	{
-		return true;
-	}
-	else {
-
 		return validarJogadaBispoCapturaEsquerda(tabuleiroBackEnd);
 	}
 }
@@ -147,39 +144,36 @@ bool PecaBispo::validarJogadaBispoCapturaDireita(char** tabuleiroBackEnd) {
 	//VALIDACAO DIAGONAL DIREITA ACIMA
 	for (int linha = globalLinhaPonteiro, coluna = globalColunaPonteiro, sairLoopEncadeado = false; linha >= 0 && coluna < COLUNAS && sairLoopEncadeado == false; linha--, coluna++) {
 
-		if (globalPecaBackupDoPonteiro != VAZIO) {
+		if (validarJogadaCorretaCaptura) {
 
-			if (validarJogadaCorretaCaptura) {
+			linhaPecaInimiga = linha;
+			colunaPecaInimiga = coluna;
 
-				linhaPecaInimiga = linha;
-				colunaPecaInimiga = coluna;
+			linha--;
+			coluna++;
 
-				linha--;
-				coluna++;
+			for (linha, coluna; linha >= 0 && coluna < COLUNAS && sairLoopEncadeado == false; linha--, coluna++) {
 
-				for (linha, coluna; linha >= 0 && coluna < COLUNAS && sairLoopEncadeado == false; linha--, coluna++) {
+				if (tabuleiroBackEnd[linha][coluna] != VAZIO) {
 
-					if (tabuleiroBackEnd[linha][coluna] != VAZIO) {
-
-						if (tabuleiroBackEnd[linha][coluna] == PECA_SELECIONADA)
-						{
-							//ELIMINO PECA INIMIGA
-							tabuleiroBackEnd[linhaPecaInimiga][colunaPecaInimiga] = VAZIO;
+					if (tabuleiroBackEnd[linha][coluna] == PECA_SELECIONADA)
+					{
+						//ELIMINO PECA INIMIGA
+						tabuleiroBackEnd[linhaPecaInimiga][colunaPecaInimiga] = VAZIO;
 
 
-							if (globalPecaSelecionada == PECA_PRETA_BISPO)
-								globalPlacarPretas++;
-							else
-								globalPlacarBrancas++;
-
-							soltaPecaAposValidacoes(tabuleiroBackEnd);
-
-							return true;
-						}
+						if (globalPecaSelecionada == PECA_PRETA_BISPO)
+							globalPlacarPretas++;
 						else
-						{
-							sairLoopEncadeado = true;
-						}
+							globalPlacarBrancas++;
+
+						soltaPecaAposValidacoes(tabuleiroBackEnd);
+
+						return true;
+					}
+					else
+					{
+						sairLoopEncadeado = true;
 					}
 				}
 			}
@@ -189,39 +183,36 @@ bool PecaBispo::validarJogadaBispoCapturaDireita(char** tabuleiroBackEnd) {
 	//VALIDACAO DIAGONAL DIREITA A BAIXO
 	for (int linha = globalLinhaPonteiro, coluna = globalColunaPonteiro, sairLoopEncadeado = false; linha < LINHAS && coluna < COLUNAS && sairLoopEncadeado == false; linha++, coluna++) {
 
-		if (globalPecaBackupDoPonteiro != VAZIO) {
+		if (validarJogadaCorretaCaptura) {
 
-			if (validarJogadaCorretaCaptura) {
+			linhaPecaInimiga = linha;
+			colunaPecaInimiga = coluna;
 
-				linhaPecaInimiga = linha;
-				colunaPecaInimiga = coluna;
+			linha++;
+			coluna++;
 
-				linha++;
-				coluna++;
+			for (linha, coluna; linha < LINHAS && coluna < COLUNAS && sairLoopEncadeado == false; linha++, coluna++) {
 
-				for (linha, coluna; linha < LINHAS && coluna < COLUNAS && sairLoopEncadeado == false; linha++, coluna++) {
+				if (tabuleiroBackEnd[linha][coluna] != VAZIO) {
 
-					if (tabuleiroBackEnd[linha][coluna] != VAZIO) {
-
-						if (tabuleiroBackEnd[linha][coluna] == PECA_SELECIONADA)
-						{
-							//ELIMINO PECA INIMIGA
-							tabuleiroBackEnd[linhaPecaInimiga][colunaPecaInimiga] = VAZIO;
+					if (tabuleiroBackEnd[linha][coluna] == PECA_SELECIONADA)
+					{
+						//ELIMINO PECA INIMIGA
+						tabuleiroBackEnd[linhaPecaInimiga][colunaPecaInimiga] = VAZIO;
 
 
-							if (globalPecaSelecionada == PECA_PRETA_BISPO)
-								globalPlacarPretas++;
-							else
-								globalPlacarBrancas++;
-
-							soltaPecaAposValidacoes(tabuleiroBackEnd);
-
-							return true;
-						}
+						if (globalPecaSelecionada == PECA_PRETA_BISPO)
+							globalPlacarPretas++;
 						else
-						{
-							sairLoopEncadeado = true;
-						}
+							globalPlacarBrancas++;
+
+						soltaPecaAposValidacoes(tabuleiroBackEnd);
+
+						return true;
+					}
+					else
+					{
+						sairLoopEncadeado = true;
 					}
 				}
 			}
@@ -239,37 +230,34 @@ bool PecaBispo::validarJogadaBispoCapturaEsquerda(char** tabuleiroBackEnd) {
 	//VALIDACAO DIAGONAL ESQUERDA ACIMA
 	for (int linha = globalLinhaPonteiro, coluna = globalColunaPonteiro, sairLoopEncadeado = false; linha >= 0 && coluna >= 0 && sairLoopEncadeado == false; linha--, coluna--) {
 
-		if (globalPecaBackupDoPonteiro != VAZIO) {
+		if (validarJogadaCorretaCaptura) {
 
-			if (validarJogadaCorretaCaptura) {
+			linhaPecaInimiga = linha;
+			colunaPecaInimiga = coluna;
 
-				linhaPecaInimiga = linha;
-				colunaPecaInimiga = coluna;
+			linha--;
+			coluna--;
 
-				linha--;
-				coluna--;
+			for (linha, coluna; linha >= 0 && coluna >= 0 && sairLoopEncadeado == false; linha--, coluna--) {
 
-				for (linha, coluna; linha >= 0 && coluna >= 0 && sairLoopEncadeado == false; linha--, coluna--) {
+				if (tabuleiroBackEnd[linha][coluna] != VAZIO) {
 
-					if (tabuleiroBackEnd[linha][coluna] != VAZIO) {
+					if (tabuleiroBackEnd[linha][coluna] == PECA_SELECIONADA)
+					{
+						//ELIMINO PECA INIMIGA
+						tabuleiroBackEnd[linhaPecaInimiga][colunaPecaInimiga] = VAZIO;
 
-						if (tabuleiroBackEnd[linha][coluna] == PECA_SELECIONADA)
-						{
-							//ELIMINO PECA INIMIGA
-							tabuleiroBackEnd[linhaPecaInimiga][colunaPecaInimiga] = VAZIO;
-
-							if (globalPecaSelecionada == PECA_PRETA_BISPO)
-								globalPlacarPretas++;
-							else
-								globalPlacarBrancas++;
-
-							soltaPecaAposValidacoes(tabuleiroBackEnd);
-							return true;
-						}
+						if (globalPecaSelecionada == PECA_PRETA_BISPO)
+							globalPlacarPretas++;
 						else
-						{
-							sairLoopEncadeado = true;
-						}
+							globalPlacarBrancas++;
+
+						soltaPecaAposValidacoes(tabuleiroBackEnd);
+						return true;
+					}
+					else
+					{
+						sairLoopEncadeado = true;
 					}
 				}
 			}
@@ -279,42 +267,40 @@ bool PecaBispo::validarJogadaBispoCapturaEsquerda(char** tabuleiroBackEnd) {
 	//VALIDACAO DIAGONAL ESQUERDA A BAIXO
 	for (int linha = globalLinhaPonteiro, coluna = globalColunaPonteiro, sairLoopEncadeado = false; linha < LINHAS && coluna >= 0 && sairLoopEncadeado == false; linha++, coluna--) {
 
-		if (globalPecaBackupDoPonteiro != VAZIO) {
+		if (validarJogadaCorretaCaptura) {
 
-			if (validarJogadaCorretaCaptura) {
+			linhaPecaInimiga = linha;
+			colunaPecaInimiga = coluna;
 
-				linhaPecaInimiga = linha;
-				colunaPecaInimiga = coluna;
+			linha++;
+			coluna--;
 
-				linha++;
-				coluna--;
+			for (linha, coluna; linha < LINHAS && coluna >= 0 && sairLoopEncadeado == false; linha++, coluna--) {
 
-				for (linha, coluna; linha < LINHAS && coluna >= 0 && sairLoopEncadeado == false; linha++, coluna--) {
+				if (tabuleiroBackEnd[linha][coluna] != VAZIO) {
 
-					if (tabuleiroBackEnd[linha][coluna] != VAZIO) {
-
-						if (tabuleiroBackEnd[linha][coluna] == PECA_SELECIONADA)
-						{
-							//ELIMINO PECA INIMIGA
-							tabuleiroBackEnd[linhaPecaInimiga][colunaPecaInimiga] = VAZIO;
+					if (tabuleiroBackEnd[linha][coluna] == PECA_SELECIONADA)
+					{
+						//ELIMINO PECA INIMIGA
+						tabuleiroBackEnd[linhaPecaInimiga][colunaPecaInimiga] = VAZIO;
 
 
-							if (globalPecaSelecionada == PECA_PRETA_BISPO)
-								globalPlacarPretas++;
-							else
-								globalPlacarBrancas++;
-
-							soltaPecaAposValidacoes(tabuleiroBackEnd);
-
-							return true;
-						}
+						if (globalPecaSelecionada == PECA_PRETA_BISPO)
+							globalPlacarPretas++;
 						else
-						{
-							sairLoopEncadeado = true;
-						}
+							globalPlacarBrancas++;
+
+						soltaPecaAposValidacoes(tabuleiroBackEnd);
+
+						return true;
+					}
+					else
+					{
+						sairLoopEncadeado = true;
 					}
 				}
 			}
+
 		}
 	}
 
