@@ -20,7 +20,7 @@ public:
 
 private:
 	PecaBase(char** tabuleiroBackEnd);
-	void verificaSeVirouDama(char** tabuleiroBackEnd);
+	void verificaSePiaoEvoluiu(char** tabuleiroBackEnd);
 	void validarJogadaPiao(char** tabuleiroBackEnd);
 	void validarJogadaPiaoCaptura(char** tabuleiroBackEnd);
 	void soltaPecaAposValidacoes(char** tabuleiroBackEnd);

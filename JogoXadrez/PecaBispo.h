@@ -7,11 +7,12 @@ public:
 	void jogarComBispo(char** tabuleiroBackEnd);
 
 private:
-	void validarJogadaBispo(char** tabuleiroBackEnd);
-	void validarJogadaBispoPecaBranca(char** tabuleiroBackEnd);
-	void validarJogadaBispoPecaPreta(char** tabuleiroBackEnd);
+	bool validarJogadaBispo(char** tabuleiroBackEnd);
+	bool validarJogadaBispoDireita(char** tabuleiroBackEnd);
+	bool validarJogadaBispoEsquerda(char** tabuleiroBackEnd);
 
-	void validarJogadaBispoCaptura(char** tabuleiroBackEnd);
-	void validarJogadaBispoPecaBrancaCaptura(char** tabuleiroBackEnd);
-	void validarJogadaBispoPecaPretaCaptura(char** tabuleiroBackEnd);
+	bool validarJogadaBispoCaptura(char** tabuleiroBackEnd);
+	bool validarJogadaBispoCapturaDireita(char** tabuleiroBackEnd);
+	bool validarJogadaBispoCapturaEsquerda(char** tabuleiroBackEnd);
+	bool validarJogadaCorretaCaptura(char** tabuleiroBackEnd, int linha, int coluna);
 };

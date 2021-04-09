@@ -1,5 +1,6 @@
 #include "PecaBase.h"
 #include "PecaPiao.h"
+#include "PecaBispo.h"
 
 extern int	globalPlacarPretas,		
 			globalPlacarBrancas;	
@@ -112,7 +113,8 @@ void PecaBase::soltaPeca(char** tabuleiroBackEnd) {
 
 	if (globalPecaSelecionada == PECA_BRANCA_BISPO || globalPecaSelecionada == PECA_PRETA_BISPO)
 	{
-		validarJogadaBispoCaptura(tabuleiroBackEnd);
+		PecaBispo bispo;
+		bispo.jogarComBispo(tabuleiroBackEnd);
 	}
 
 	if (globalPecaSelecionada == PECA_BRANCA_CAVALO || globalPecaSelecionada == PECA_PRETA_CAVALO)
@@ -135,7 +137,7 @@ void PecaBase::soltaPeca(char** tabuleiroBackEnd) {
 		validarJogadaBispoCaptura(tabuleiroBackEnd);
 	}
 
-	verificaSeVirouDama(tabuleiroBackEnd);
+	verificaSePiaoEvoluiu(tabuleiroBackEnd);
 }
 
 void PecaBase::cancelaJogada(char** tabuleiroBackEnd) {
@@ -152,7 +154,7 @@ void PecaBase::cancelaJogada(char** tabuleiroBackEnd) {
 	}
 }
 
-void PecaBase::verificaSeVirouDama(char** tabuleiroBackEnd) {
+void PecaBase::verificaSePiaoEvoluiu(char** tabuleiroBackEnd) {
 
 	for (int coluna = 0; coluna < COLUNAS; coluna++)
 	{
@@ -166,209 +168,6 @@ void PecaBase::verificaSeVirouDama(char** tabuleiroBackEnd) {
 		{
 			tabuleiroBackEnd[7][coluna] = PECA_PRETA_DAMA;
 			globalPecaBackupDoPonteiro = PECA_PRETA_DAMA;
-		}
-	}
-}
-
-void PecaBase::validarJogadaBispoCaptura(char** tabuleiroBackEnd)
-{
-	int linhaPecaInimiga = 0,
-		colunaPecaInimiga = 0;
-	bool sairLoopEncadeado = false;
-
-	//VALIDACAO DIAGONAL DIREITA A BAIXO
-	for (int linha = globalLinhaPonteiro, coluna = globalColunaPonteiro, sairLoopEncadeado = false; linha < LINHAS && coluna < COLUNAS && sairLoopEncadeado == false; linha++, coluna++) {
-
-		if (globalPecaBackupDoPonteiro != VAZIO) {
-
-				  //JOGADA DO BISPO BRANCO
-			if (((tabuleiroBackEnd[linha][coluna] == PECA_PRETA_TORRE || tabuleiroBackEnd[linha][coluna] == PECA_PRETA_CAVALO || tabuleiroBackEnd[linha][coluna] == PECA_PRETA_BISPO ||
-				  tabuleiroBackEnd[linha][coluna] == PECA_PRETA_RAINHA || tabuleiroBackEnd[linha][coluna] == PECA_PRETA_REI || tabuleiroBackEnd[linha][coluna] == PECA_PRETA_PIAO)
-				  && globalPecaSelecionada == PECA_BRANCA_BISPO) ||
-
-				//JOGADA DO BISPO PRETO
-				((tabuleiroBackEnd[linha][coluna] == PECA_BRANCA_TORRE || tabuleiroBackEnd[linha][coluna] == PECA_BRANCA_CAVALO || tabuleiroBackEnd[linha][coluna] == PECA_BRANCA_BISPO ||
-				  tabuleiroBackEnd[linha][coluna] == PECA_BRANCA_RAINHA || tabuleiroBackEnd[linha][coluna] == PECA_BRANCA_REI || tabuleiroBackEnd[linha][coluna] == PECA_BRANCA_PIAO)
-				  && globalPecaSelecionada == PECA_PRETA_BISPO)) {
-
-				linhaPecaInimiga = linha;
-				colunaPecaInimiga = coluna;
-
-				linha++;
-				coluna++;
-
-				for (linha, coluna; linha < LINHAS && coluna < COLUNAS && sairLoopEncadeado == false; linha++, coluna++) {
-
-					if (tabuleiroBackEnd[linha][coluna] != VAZIO) {
-
-						if (tabuleiroBackEnd[linha][coluna] == PECA_SELECIONADA)
-						{
-							//ELIMINO PECA INIMIGA
-							tabuleiroBackEnd[linhaPecaInimiga][colunaPecaInimiga] = VAZIO;
-
-
-							if (globalPecaSelecionada == PECA_PRETA_BISPO)
-								globalPlacarPretas++;
-							else
-								globalPlacarBrancas++;
-
-							soltaPecaAposValidacoes(tabuleiroBackEnd);
-							return;
-						}
-						else
-						{
-							sairLoopEncadeado = true;
-						}
-					}
-				}
-			}
-		}
-	}
-
-	//VALIDACAO DIAGONAL ESQUERDA A BAIXO
-	for (int linha = globalLinhaPonteiro, coluna = globalColunaPonteiro, sairLoopEncadeado = false; linha < LINHAS && coluna >= 0 && sairLoopEncadeado == false; linha++, coluna--) {
-
-		if (globalPecaBackupDoPonteiro != VAZIO) {
-
-			//JOGADA DO BISPO BRANCO
-			if (((tabuleiroBackEnd[linha][coluna] == PECA_PRETA_TORRE || tabuleiroBackEnd[linha][coluna] == PECA_PRETA_CAVALO || tabuleiroBackEnd[linha][coluna] == PECA_PRETA_BISPO ||
-				tabuleiroBackEnd[linha][coluna] == PECA_PRETA_RAINHA || tabuleiroBackEnd[linha][coluna] == PECA_PRETA_REI || tabuleiroBackEnd[linha][coluna] == PECA_PRETA_PIAO)
-				&& globalPecaSelecionada == PECA_BRANCA_BISPO) ||
-
-				//JOGADA DO BISPO PRETO
-				((tabuleiroBackEnd[linha][coluna] == PECA_BRANCA_TORRE || tabuleiroBackEnd[linha][coluna] == PECA_BRANCA_CAVALO || tabuleiroBackEnd[linha][coluna] == PECA_BRANCA_BISPO ||
-				tabuleiroBackEnd[linha][coluna] == PECA_BRANCA_RAINHA || tabuleiroBackEnd[linha][coluna] == PECA_BRANCA_REI || tabuleiroBackEnd[linha][coluna] == PECA_BRANCA_PIAO)
-				&& globalPecaSelecionada == PECA_PRETA_BISPO)) {
-
-				linhaPecaInimiga = linha;
-				colunaPecaInimiga = coluna;
-
-				linha++;
-				coluna--;
-
-				for (linha, coluna; linha < LINHAS && coluna >= 0  && sairLoopEncadeado == false; linha++, coluna--) {
-
-					if (tabuleiroBackEnd[linha][coluna] != VAZIO) {
-
-						if (tabuleiroBackEnd[linha][coluna] == PECA_SELECIONADA)
-						{
-							//ELIMINO PECA INIMIGA
-							tabuleiroBackEnd[linhaPecaInimiga][colunaPecaInimiga] = VAZIO;
-
-
-							if (globalPecaSelecionada == PECA_PRETA_BISPO)
-								globalPlacarPretas++;
-							else
-								globalPlacarBrancas++;
-
-							soltaPecaAposValidacoes(tabuleiroBackEnd);
-							return;
-						}
-						else
-						{
-							sairLoopEncadeado = true;
-						}
-					}
-				}
-			}
-		}
-	}
-
-	//VALIDACAO DIAGONAL DIREITA ACIMA
-	for (int linha = globalLinhaPonteiro, coluna = globalColunaPonteiro, sairLoopEncadeado = false; linha >= 0 && coluna < COLUNAS && sairLoopEncadeado == false; linha--, coluna++) {
-
-		if (globalPecaBackupDoPonteiro != VAZIO) {
-
-			//JOGADA DO BISPO BRANCO
-			if (((tabuleiroBackEnd[linha][coluna] == PECA_PRETA_TORRE || tabuleiroBackEnd[linha][coluna] == PECA_PRETA_CAVALO || tabuleiroBackEnd[linha][coluna] == PECA_PRETA_BISPO ||
-				tabuleiroBackEnd[linha][coluna] == PECA_PRETA_RAINHA || tabuleiroBackEnd[linha][coluna] == PECA_PRETA_REI || tabuleiroBackEnd[linha][coluna] == PECA_PRETA_PIAO)
-				&& globalPecaSelecionada == PECA_BRANCA_BISPO) ||
-
-				//JOGADA DO BISPO PRETO
-				((tabuleiroBackEnd[linha][coluna] == PECA_BRANCA_TORRE || tabuleiroBackEnd[linha][coluna] == PECA_BRANCA_CAVALO || tabuleiroBackEnd[linha][coluna] == PECA_BRANCA_BISPO ||
-					tabuleiroBackEnd[linha][coluna] == PECA_BRANCA_RAINHA || tabuleiroBackEnd[linha][coluna] == PECA_BRANCA_REI || tabuleiroBackEnd[linha][coluna] == PECA_BRANCA_PIAO)
-					&& globalPecaSelecionada == PECA_PRETA_BISPO)) {
-
-				linhaPecaInimiga = linha;
-				colunaPecaInimiga = coluna;
-
-				linha--;
-				coluna++;
-
-				for (linha, coluna; linha >= 0 && coluna < COLUNAS && sairLoopEncadeado == false; linha--, coluna++) {
-
-					if (tabuleiroBackEnd[linha][coluna] != VAZIO) {
-
-						if (tabuleiroBackEnd[linha][coluna] == PECA_SELECIONADA)
-						{
-							//ELIMINO PECA INIMIGA
-							tabuleiroBackEnd[linhaPecaInimiga][colunaPecaInimiga] = VAZIO;
-
-
-							if (globalPecaSelecionada == PECA_PRETA_BISPO)
-								globalPlacarPretas++;
-							else
-								globalPlacarBrancas++;
-
-							soltaPecaAposValidacoes(tabuleiroBackEnd);
-							return;
-						}
-						else
-						{
-							sairLoopEncadeado = true;
-						}
-					}
-				}
-			}
-		}
-	}
-
-	//VALIDACAO DIAGONAL ESQUERDA ACIMA
-	for (int linha = globalLinhaPonteiro, coluna = globalColunaPonteiro, sairLoopEncadeado = false; linha >= 0 && coluna >= 0 && sairLoopEncadeado == false; linha--, coluna--) {
-
-		if (globalPecaBackupDoPonteiro != VAZIO) {
-
-			//JOGADA DO BISPO BRANCO
-			if (((tabuleiroBackEnd[linha][coluna] == PECA_PRETA_TORRE || tabuleiroBackEnd[linha][coluna] == PECA_PRETA_CAVALO || tabuleiroBackEnd[linha][coluna] == PECA_PRETA_BISPO ||
-				tabuleiroBackEnd[linha][coluna] == PECA_PRETA_RAINHA || tabuleiroBackEnd[linha][coluna] == PECA_PRETA_REI || tabuleiroBackEnd[linha][coluna] == PECA_PRETA_PIAO)
-				&& globalPecaSelecionada == PECA_BRANCA_BISPO) ||
-
-				//JOGADA DO BISPO PRETO
-				((tabuleiroBackEnd[linha][coluna] == PECA_BRANCA_TORRE || tabuleiroBackEnd[linha][coluna] == PECA_BRANCA_CAVALO || tabuleiroBackEnd[linha][coluna] == PECA_BRANCA_BISPO ||
-				tabuleiroBackEnd[linha][coluna] == PECA_BRANCA_RAINHA || tabuleiroBackEnd[linha][coluna] == PECA_BRANCA_REI || tabuleiroBackEnd[linha][coluna] == PECA_BRANCA_PIAO)
-				&& globalPecaSelecionada == PECA_PRETA_BISPO)) {
-
-				linhaPecaInimiga = linha;
-				colunaPecaInimiga = coluna;
-
-				linha--;
-				coluna--;
-
-				for (linha, coluna; linha >= 0 && coluna >= 0 && sairLoopEncadeado == false; linha--, coluna--) {
-
-					if (tabuleiroBackEnd[linha][coluna] != VAZIO) {
-
-						if (tabuleiroBackEnd[linha][coluna] == PECA_SELECIONADA)
-						{
-							//ELIMINO PECA INIMIGA
-							tabuleiroBackEnd[linhaPecaInimiga][colunaPecaInimiga] = VAZIO;
-
-
-							if (globalPecaSelecionada == PECA_PRETA_BISPO)
-								globalPlacarPretas++;
-							else
-								globalPlacarBrancas++;
-
-							soltaPecaAposValidacoes(tabuleiroBackEnd);
-							return;
-						}
-						else
-						{
-							sairLoopEncadeado = true;
-						}
-					}
-				}
-			}
 		}
 	}
 }
