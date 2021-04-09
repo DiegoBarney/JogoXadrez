@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="JogoXadrez.cpp" />
     <ClCompile Include="PecaBase.cpp" />
+    <ClCompile Include="PecaBispo.cpp" />
     <ClCompile Include="PecaPiao.cpp" />
     <ClCompile Include="Tabuleiro.cpp" />
     <ClCompile Include="TecladoJogo.cpp" />

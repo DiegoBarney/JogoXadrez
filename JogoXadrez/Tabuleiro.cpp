@@ -98,51 +98,51 @@ void Tabuleiro::tabuleiroUserIterface(char** tabuleiroBackEnd) {
 			for (int colunasInterface = 0; colunasInterface < TAM_COLUNAS_INTERFACE; colunasInterface++)
 			{
 				if (tabuleiroBackEnd[linhasInterface - descontoLinhasInterfaceMatriz][colunasInterface] == PECA_BRANCA_TORRE) {
-					printf("\x1b[37m   TO.B  ");
+					printf("\x1b[37m    TO   ");
 
 				}
 				else if (tabuleiroBackEnd[linhasInterface - descontoLinhasInterfaceMatriz][colunasInterface] == PECA_BRANCA_CAVALO) {
-					printf("\x1b[37m   CA.B  ");
+					printf("\x1b[37m    CA   ");
 
 				}
 				else if (tabuleiroBackEnd[linhasInterface - descontoLinhasInterfaceMatriz][colunasInterface] == PECA_BRANCA_BISPO) {
-					printf("\x1b[37m   BI.B  ");
+					printf("\x1b[37m    BI   ");
 
 				}
 				else if (tabuleiroBackEnd[linhasInterface - descontoLinhasInterfaceMatriz][colunasInterface] == PECA_BRANCA_RAINHA) {
-					printf("\x1b[37m   RA.B  ");
+					printf("\x1b[37m    RA   ");
 
 				}
 				else if (tabuleiroBackEnd[linhasInterface - descontoLinhasInterfaceMatriz][colunasInterface] == PECA_BRANCA_REI) {
-					printf("\x1b[37m   RE.B  ");
+					printf("\x1b[37m    RE   ");
 
 				}
 				else if (tabuleiroBackEnd[linhasInterface - descontoLinhasInterfaceMatriz][colunasInterface] == PECA_BRANCA_PIAO) {
-					printf("\x1b[37m   PI.B  ");
+					printf("\x1b[37m    PI   ");
 
 				}
 				else if (tabuleiroBackEnd[linhasInterface - descontoLinhasInterfaceMatriz][colunasInterface] == PECA_PRETA_TORRE) {
-					printf("\x1b[31m   TO.P  ");
+					printf("\x1b[34m    TO   ");
 
 				}
 				else if (tabuleiroBackEnd[linhasInterface - descontoLinhasInterfaceMatriz][colunasInterface] == PECA_PRETA_CAVALO) {
-					printf("\x1b[31m   CA.P  ");
+					printf("\x1b[34m    CA   ");
 
 				}
 				else if (tabuleiroBackEnd[linhasInterface - descontoLinhasInterfaceMatriz][colunasInterface] == PECA_PRETA_BISPO) {
-					printf("\x1b[31m   BI.P  ");
+					printf("\x1b[34m    BI   ");
 
 				}
 				else if (tabuleiroBackEnd[linhasInterface - descontoLinhasInterfaceMatriz][colunasInterface] == PECA_PRETA_RAINHA) {
-					printf("\x1b[31m   RA.P  ");
+					printf("\x1b[34m    RA   ");
 
 				}
 				else if (tabuleiroBackEnd[linhasInterface - descontoLinhasInterfaceMatriz][colunasInterface] == PECA_PRETA_REI) {
-					printf("\x1b[31m   RE.P  ");
+					printf("\x1b[34m    RE   ");
 
 				}
 				else if (tabuleiroBackEnd[linhasInterface - descontoLinhasInterfaceMatriz][colunasInterface] == PECA_PRETA_PIAO) {
-					printf("\x1b[31m   PI.P  ");
+					printf("\x1b[34m    PI   ");
 
 				}
 

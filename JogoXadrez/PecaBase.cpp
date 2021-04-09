@@ -119,22 +119,22 @@ void PecaBase::soltaPeca(char** tabuleiroBackEnd) {
 
 	if (globalPecaSelecionada == PECA_BRANCA_CAVALO || globalPecaSelecionada == PECA_PRETA_CAVALO)
 	{
-		validarJogadaBispoCaptura(tabuleiroBackEnd);
+		//validarJogadaBispoCaptura(tabuleiroBackEnd);
 	}
 
 	if (globalPecaSelecionada == PECA_BRANCA_TORRE || globalPecaSelecionada == PECA_PRETA_TORRE)
 	{
-		validarJogadaBispoCaptura(tabuleiroBackEnd);
+		//validarJogadaBispoCaptura(tabuleiroBackEnd);
 	}
 
 	if (globalPecaSelecionada == PECA_BRANCA_RAINHA || globalPecaSelecionada == PECA_PRETA_RAINHA)
 	{
-		validarJogadaBispoCaptura(tabuleiroBackEnd);
+		//validarJogadaBispoCaptura(tabuleiroBackEnd);
 	}
 
 	if (globalPecaSelecionada == PECA_BRANCA_REI || globalPecaSelecionada == PECA_PRETA_REI)
 	{
-		validarJogadaBispoCaptura(tabuleiroBackEnd);
+		//validarJogadaBispoCaptura(tabuleiroBackEnd);
 	}
 
 	verificaSePiaoEvoluiu(tabuleiroBackEnd);
