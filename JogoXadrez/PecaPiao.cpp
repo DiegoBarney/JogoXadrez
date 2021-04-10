@@ -27,7 +27,6 @@ void soltaPecaAposValidacoes(char** tabuleiroBackEnd) {
 }
 
 void PecaPiao::jogarComPiao(char** tabuleiroBackEnd) {
-
 	if (globalPecaSelecionada == PECA_BRANCA_PIAO || globalPecaSelecionada == PECA_PRETA_PIAO)
 	{
 		if (globalPecaBackupDoPonteiro == VAZIO)

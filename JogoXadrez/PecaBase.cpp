@@ -1,6 +1,7 @@
 #include "PecaBase.h"
 #include "PecaPiao.h"
 #include "PecaBispo.h"
+#include "PecaTorre.h"
 
 extern int	globalPlacarPretas,		
 			globalPlacarBrancas;	
@@ -119,22 +120,23 @@ void PecaBase::soltaPeca(char** tabuleiroBackEnd) {
 
 	if (globalPecaSelecionada == PECA_BRANCA_CAVALO || globalPecaSelecionada == PECA_PRETA_CAVALO)
 	{
-		//validarJogadaBispoCaptura(tabuleiroBackEnd);
+		//JOGA COM CAVALO
 	}
 
 	if (globalPecaSelecionada == PECA_BRANCA_TORRE || globalPecaSelecionada == PECA_PRETA_TORRE)
 	{
-		//validarJogadaBispoCaptura(tabuleiroBackEnd);
+		PecaTorre torre;
+		torre.jogarComTorre(tabuleiroBackEnd);
 	}
 
 	if (globalPecaSelecionada == PECA_BRANCA_RAINHA || globalPecaSelecionada == PECA_PRETA_RAINHA)
 	{
-		//validarJogadaBispoCaptura(tabuleiroBackEnd);
+		//JOGA COM RAINHA
 	}
 
 	if (globalPecaSelecionada == PECA_BRANCA_REI || globalPecaSelecionada == PECA_PRETA_REI)
 	{
-		//validarJogadaBispoCaptura(tabuleiroBackEnd);
+		//JOGA COM REI
 	}
 
 	verificaSePiaoEvoluiu(tabuleiroBackEnd);
@@ -184,3 +186,6 @@ void PecaBase::soltaPecaAposValidacoes(char** tabuleiroBackEnd) {
 
 	globalPecaSelecionada = VAZIO;
 }
+
+
+

@@ -2,8 +2,6 @@
 #include "CoreXadrez.h"
 #include "Tabuleiro.h"
 
-
-
 class PecaBase {     
 
 public:     
@@ -18,8 +16,10 @@ public:
 	void soltaPeca(char** tabuleiroBackEnd);
 	void cancelaJogada(char** tabuleiroBackEnd);
 
+
 private:
 	PecaBase(char** tabuleiroBackEnd);
 	void verificaSePiaoEvoluiu(char** tabuleiroBackEnd);
 	void soltaPecaAposValidacoes(char** tabuleiroBackEnd);
+
 };

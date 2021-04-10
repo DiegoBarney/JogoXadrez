@@ -143,6 +143,7 @@
     <ClCompile Include="PecaBase.cpp" />
     <ClCompile Include="PecaBispo.cpp" />
     <ClCompile Include="PecaPiao.cpp" />
+    <ClCompile Include="PecaTorre.cpp" />
     <ClCompile Include="Tabuleiro.cpp" />
     <ClCompile Include="TecladoJogo.cpp" />
   </ItemGroup>
@@ -152,6 +153,7 @@
     <ClInclude Include="PecaBase.h" />
     <ClInclude Include="PecaBispo.h" />
     <ClInclude Include="PecaPiao.h" />
+    <ClInclude Include="PecaTorre.h" />
     <ClInclude Include="Tabuleiro.h" />
     <ClInclude Include="TecladoJogo.h" />
   </ItemGroup>
