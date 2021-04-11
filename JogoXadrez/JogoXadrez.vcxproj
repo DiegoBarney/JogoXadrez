@@ -145,9 +145,11 @@
     <ClCompile Include="PecaCavalo.cpp" />
     <ClCompile Include="PecaPiao.cpp" />
     <ClCompile Include="PecaRainha.cpp" />
+    <ClCompile Include="PecaRei.cpp" />
     <ClCompile Include="PecaTorre.cpp" />
     <ClCompile Include="Tabuleiro.cpp" />
     <ClCompile Include="TecladoJogo.cpp" />
+    <ClCompile Include="Peca.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CoreXadrez.h" />
@@ -157,9 +159,11 @@
     <ClInclude Include="PecaCavalo.h" />
     <ClInclude Include="PecaPiao.h" />
     <ClInclude Include="PecaRainha.h" />
+    <ClInclude Include="PecaRei.h" />
     <ClInclude Include="PecaTorre.h" />
     <ClInclude Include="Tabuleiro.h" />
     <ClInclude Include="TecladoJogo.h" />
+    <ClInclude Include="Peca.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

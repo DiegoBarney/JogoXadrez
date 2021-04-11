@@ -1,4 +1,5 @@
 #include "PecaTorre.h"
+#include"Peca.h"
 
 extern int		globalLinhaPecaSelecionada,
 				globalColunaPecaSelecionada;
@@ -152,7 +153,7 @@ bool PecaTorre::validarJogadaTorreCaptura(char** tabuleiroBackEnd) {
 
 bool PecaTorre::validarJogadaCorretaCaptura() {
 
-	//JOGADA DA TORRE
+	//JOGADA DA TORRE BRANCA
 	if (((globalPecaBackupDoPonteiro == PECA_PRETA_TORRE || globalPecaBackupDoPonteiro == PECA_PRETA_CAVALO || globalPecaBackupDoPonteiro == PECA_PRETA_BISPO ||
 		globalPecaBackupDoPonteiro == PECA_PRETA_RAINHA || globalPecaBackupDoPonteiro == PECA_PRETA_REI || globalPecaBackupDoPonteiro == PECA_PRETA_PIAO)
 		&& globalPecaSelecionada == PECA_BRANCA_TORRE) ||
