@@ -45,29 +45,48 @@ int validacoesDeCapturaPeca(char** tabuleiroBackEnd, int linha, int coluna) {
 
 void PecaBispo::jogarComBispo(char** tabuleiroBackEnd) {
 
-	if (validarJogadaBispo(tabuleiroBackEnd))
-		return;
-
-	if (validarJogadaBispoCaptura(tabuleiroBackEnd)) {
-
-		if (globalPecaBackupDoPonteiro == PECA_PRETA_BISPO)
-			globalPlacarPretas++;
-		else
-			globalPlacarBrancas++;
-
+	if (globalPecaBackupDoPonteiro == VAZIO)
+	{
+		if (validarJogadaBispo(tabuleiroBackEnd))
+		{
+			return;
+		}
+		else {
+			//avisos
+		}
 	}
+	else if(globalPecaBackupDoPonteiro != VAZIO && validarJogadaCorretaCaptura()) {
 
+		if (validarJogadaBispoCaptura(tabuleiroBackEnd)) {
+
+			if (globalPecaBackupDoPonteiro == PECA_PRETA_BISPO)
+				globalPlacarPretas++;
+			else
+				globalPlacarBrancas++;
+
+			return;
+		}
+		else {
+			//avisos
+		}
+	}
+	else {
+		//avisos
+	}
 }
 
 bool PecaBispo::validarJogadaBispo(char** tabuleiroBackEnd) {
 
-	if (globalPecaBackupDoPonteiro == VAZIO) {
 
-		if (!validarJogadaBispoDireita(tabuleiroBackEnd))
-		{
-			return validarJogadaBispoEsquerda(tabuleiroBackEnd);
-		}
+	if (!validarJogadaBispoDireita(tabuleiroBackEnd))
+	{
+		return validarJogadaBispoEsquerda(tabuleiroBackEnd);
+	}else{
+
+		return true;
 	}
+
+	
 	return false;
 }
 
@@ -122,13 +141,11 @@ bool PecaBispo::validarJogadaBispoEsquerda(char** tabuleiroBackEnd) {
 
 bool PecaBispo::validarJogadaBispoCaptura(char** tabuleiroBackEnd) {
 
-	if (globalPecaBackupDoPonteiro != VAZIO && validarJogadaCorretaCaptura()) {
-
-		if (!validarJogadaBispoCapturaDireita(tabuleiroBackEnd))
-		{
-			return validarJogadaBispoCapturaEsquerda(tabuleiroBackEnd);
-		}
-
+	if (!validarJogadaBispoCapturaDireita(tabuleiroBackEnd))
+	{
+		return validarJogadaBispoCapturaEsquerda(tabuleiroBackEnd);
+	}
+	else {
 		return true;
 	}
 

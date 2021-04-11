@@ -13,7 +13,6 @@ extern int		globalPlacarPretas,
 extern char		globalAvisos[1000];
 
 
-
 void soltaPecaAposValidacoesTorre(char** tabuleiroBackEnd) {
 	//RETIRO A PECA DO LOCAL ANTERIOR 
 	tabuleiroBackEnd[globalLinhaPecaSelecionada][globalColunaPecaSelecionada] = VAZIO;
@@ -47,27 +46,45 @@ int validacoesDeCapturaPecaTorre(char** tabuleiroBackEnd, int linha, int coluna)
 
 void PecaTorre::jogarComTorre(char** tabuleiroBackEnd) {
 
-	if (validarJogadaTorre(tabuleiroBackEnd))
-		return;
+	if (globalPecaBackupDoPonteiro == VAZIO)
+	{
+		if (validarJogadaTorre(tabuleiroBackEnd))
+		{
+			return;
+		}
+		else {
+			//avisos
+		}
+	}
+	else if(globalPecaBackupDoPonteiro != VAZIO && validarJogadaCorretaCaptura()) {
 
-	if (validarJogadaTorreCaptura(tabuleiroBackEnd)) {
+		if (validarJogadaTorreCaptura(tabuleiroBackEnd)) {
 
-		if (globalPecaBackupDoPonteiro == PECA_PRETA_TORRE)
-			globalPlacarPretas++;
-		else
-			globalPlacarBrancas++;
+			if (globalPecaBackupDoPonteiro == PECA_PRETA_TORRE)
+				globalPlacarPretas++;
+			else
+				globalPlacarBrancas++;
+
+			return;
+		}
+		else {
+			//avisos
+		}
+	}
+	else {
+		//avisos
 	}
 
 }
 
 bool PecaTorre::validarJogadaTorre(char** tabuleiroBackEnd) {
 
-	if(globalPecaBackupDoPonteiro == VAZIO)
+	if (!validarJogadaTorreVertical(tabuleiroBackEnd))
 	{
-		if (!validarJogadaTorreVertical(tabuleiroBackEnd))
-		{
-			return validarJogadaBispoHorizontal(tabuleiroBackEnd);
-		}
+		return validarJogadaBispoHorizontal(tabuleiroBackEnd);
+	}
+	else{
+		return true;
 	}
 
 	return false;
@@ -130,13 +147,11 @@ bool PecaTorre::validarJogadaBispoHorizontal(char** tabuleiroBackEnd) {
 
 bool PecaTorre::validarJogadaTorreCaptura(char** tabuleiroBackEnd) {
 
-	if (globalPecaBackupDoPonteiro != VAZIO && validarJogadaCorretaCaptura()) {
+	if (!validarJogadaTorreCapturaVertical(tabuleiroBackEnd)) {
 
-		if (!validarJogadaTorreCapturaVertical(tabuleiroBackEnd)) {
-
-			return validarJogadaTorreCapturaHorizontal(tabuleiroBackEnd);
-		}
-
+		return validarJogadaTorreCapturaHorizontal(tabuleiroBackEnd);
+	}
+	else {
 		return true;
 	}
 
