@@ -141,25 +141,7 @@ bool PecaBispo::validarJogadaBispoEsquerda(char** tabuleiroBackEnd) {
 
 bool PecaBispo::validarJogadaBispoCaptura(char** tabuleiroBackEnd) {
 
-	if (!validarJogadaBispoCapturaDireita(tabuleiroBackEnd))
-	{
-		return validarJogadaBispoCapturaEsquerda(tabuleiroBackEnd);
-	}
-	else {
-		return true;
-	}
-
-	return false;
-}
-
-bool PecaBispo::validarJogadaBispoCapturaDireita(char** tabuleiroBackEnd) {
-
-	return validarJogadaBispoDireita(tabuleiroBackEnd);
-}
-
-bool PecaBispo::validarJogadaBispoCapturaEsquerda(char** tabuleiroBackEnd) {
-
-	return validarJogadaBispoEsquerda(tabuleiroBackEnd);
+	return validarJogadaBispo(tabuleiroBackEnd);
 }
 
 bool PecaBispo::validarJogadaCorretaCaptura() {

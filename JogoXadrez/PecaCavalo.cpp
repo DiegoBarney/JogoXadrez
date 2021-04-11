@@ -27,7 +27,6 @@ void soltaPecaAposValidacoesCavalo(char** tabuleiroBackEnd) {
 	globalPecaSelecionada = VAZIO;
 }
 
-
 void PecaCavalo::jogarComCavalo(char** tabuleiroBackEnd) {
 
 	if (globalPecaBackupDoPonteiro == VAZIO)
@@ -62,24 +61,45 @@ void PecaCavalo::jogarComCavalo(char** tabuleiroBackEnd) {
 
 bool PecaCavalo::validarJogadaCavalo(char** tabuleiroBackEnd) {
 
+	if (!validarJogadaCavaloEsquerda(tabuleiroBackEnd))
+	{
+		if (validarJogadaCavaloDireita(tabuleiroBackEnd))
+		{
+			return true;
+		}
+	}
+	else {
+		return true;
+	}
+
+
+	return false;
+}
+
+bool PecaCavalo::validarJogadaCavaloEsquerda(char** tabuleiroBackEnd) {
+
 	if (!validarJogadaCavaloEsquerdaAcima(tabuleiroBackEnd))
 	{
-		if (!validarJogadaCavaloEsquerdaAbaixo(tabuleiroBackEnd))
-		{
-			if (!validarJogadaCavaloDireitaAcima(tabuleiroBackEnd))
-			{
-				if (validarJogadaCavaloDireitaAbaixo(tabuleiroBackEnd))
-					return true;
-			}
-			else
-				return true;
-		}
-		else
+		if (validarJogadaCavaloEsquerdaAbaixo(tabuleiroBackEnd))
 			return true;
 	}
-	else
+	else {
 		return true;
+	}
 
+	return false;
+}
+
+bool PecaCavalo::validarJogadaCavaloDireita(char** tabuleiroBackEnd) {
+
+	if (!validarJogadaCavaloDireitaAcima(tabuleiroBackEnd))
+	{
+		if (validarJogadaCavaloDireitaAbaixo(tabuleiroBackEnd))
+			return true;
+	}
+	else {
+		return true;
+	}
 
 	return false;
 }
@@ -97,20 +117,19 @@ bool PecaCavalo::validarJogadaCavaloEsquerdaAcima(char** tabuleiroBackEnd) {
 		}
 
 	}
-	else
-	{
-		linha = globalLinhaPonteiro + 1;
-		coluna = globalColunaPonteiro + 2;
 
-		if (linha < LINHAS && coluna < COLUNAS)
+	linha = globalLinhaPonteiro + 1;
+	coluna = globalColunaPonteiro + 2;
+
+	if (linha < LINHAS && coluna < COLUNAS)
+	{
+		if (tabuleiroBackEnd[linha][coluna] == PECA_SELECIONADA)
 		{
-			if (tabuleiroBackEnd[linha][coluna] == PECA_SELECIONADA)
-			{
-				soltaPecaAposValidacoesCavalo(tabuleiroBackEnd);
-				return true;
-			}
+			soltaPecaAposValidacoesCavalo(tabuleiroBackEnd);
+			return true;
 		}
 	}
+	
 
 	return false;
 }
@@ -127,20 +146,19 @@ bool PecaCavalo::validarJogadaCavaloEsquerdaAbaixo(char** tabuleiroBackEnd) {
 			return true;
 		}
 	}
-	else
-	{
-		linha = globalLinhaPonteiro - 2;
-		coluna = globalColunaPonteiro + 1;
 
-		if (linha >= 0 && coluna < COLUNAS)
+	linha = globalLinhaPonteiro - 2;
+	coluna = globalColunaPonteiro + 1;
+
+	if (linha >= 0 && coluna < COLUNAS)
+	{
+		if (tabuleiroBackEnd[linha][coluna] == PECA_SELECIONADA)
 		{
-			if (tabuleiroBackEnd[linha][coluna] == PECA_SELECIONADA)
-			{
-				soltaPecaAposValidacoesCavalo(tabuleiroBackEnd);
-				return true;
-			}
+			soltaPecaAposValidacoesCavalo(tabuleiroBackEnd);
+			return true;
 		}
 	}
+
 
 	return false;
 }
@@ -158,20 +176,19 @@ bool PecaCavalo::validarJogadaCavaloDireitaAcima(char** tabuleiroBackEnd) {
 		}
 
 	}
-	else
-	{
-		linha = globalLinhaPonteiro + 1;
-		coluna = globalColunaPonteiro - 2;
 
-		if (linha < LINHAS && coluna >= 0)
+	linha = globalLinhaPonteiro + 1;
+	coluna = globalColunaPonteiro - 2;
+
+	if (linha < LINHAS && coluna >= 0)
+	{
+		if (tabuleiroBackEnd[linha][coluna] == PECA_SELECIONADA)
 		{
-			if (tabuleiroBackEnd[linha][coluna] == PECA_SELECIONADA)
-			{
-				soltaPecaAposValidacoesCavalo(tabuleiroBackEnd);
-				return true;
-			}
+			soltaPecaAposValidacoesCavalo(tabuleiroBackEnd);
+			return true;
 		}
 	}
+	
 
 	return false;
 }
@@ -188,41 +205,24 @@ bool PecaCavalo::validarJogadaCavaloDireitaAbaixo(char** tabuleiroBackEnd) {
 			return true;
 		}
 	}
-	else
-	{
-		linha = globalLinhaPonteiro - 2;
-		coluna = globalColunaPonteiro - 1;
 
-		if (linha >= 0 && coluna >= 0)
+	linha = globalLinhaPonteiro - 2;
+	coluna = globalColunaPonteiro - 1;
+
+	if (linha >= 0 && coluna >= 0)
+	{
+		if (tabuleiroBackEnd[linha][coluna] == PECA_SELECIONADA)
 		{
-			if (tabuleiroBackEnd[linha][coluna] == PECA_SELECIONADA)
-			{
-				soltaPecaAposValidacoesCavalo(tabuleiroBackEnd);
-				return true;
-			}
+			soltaPecaAposValidacoesCavalo(tabuleiroBackEnd);
+			return true;
 		}
 	}
+	
 	return false;
 }
 
 bool PecaCavalo::validarJogadaCavaloCaptura(char** tabuleiroBackEnd) {
-	
-}
-
-bool PecaCavalo::validarJogadaCavaloEsquerdaAcimaCaptura(char** tabuleiroBackEnd) {
-	return validarJogadaCavaloEsquerdaAcima(tabuleiroBackEnd);
-}
-
-bool PecaCavalo::validarJogadaCavaloEsquerdaAbaixoCaptura(char** tabuleiroBackEnd) {
-	return validarJogadaCavaloEsquerdaAbaixo(tabuleiroBackEnd);
-}
-
-bool PecaCavalo::validarJogadaCavaloDireitaAcimaCaptura(char** tabuleiroBackEnd) {
-	return validarJogadaCavaloDireitaAcima(tabuleiroBackEnd);
-}
-
-bool PecaCavalo::validarJogadaCavaloDireitaAbaixoCaptura(char** tabuleiroBackEnd) {
-	return validarJogadaCavaloDireitaAbaixo(tabuleiroBackEnd);
+	return validarJogadaCavalo(tabuleiroBackEnd);
 }
 
 bool PecaCavalo::validarJogadaCorretaCapturaCavalo() {

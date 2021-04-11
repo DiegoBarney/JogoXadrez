@@ -9,9 +9,9 @@ extern int				globalPlacarPretas = 0,
 
 extern char				globalAvisos[1000] = {' '};					
 				
-extern char				globalPecaDeveJogarAgora = PECA_BRANCA;		
-extern dados_jogador	globalPlayer1 = { " ", PECA_BRANCA, false },						
-						globalPlayer2 = { " ", PECA_BRANCA, false };						
+//extern char				globalPecaDeveJogarAgora = PECA_BRANCA;		
+extern dados_jogador	globalPlayer1 = { " ", ' ', false },						
+						globalPlayer2 = { " ", ' ', false };						
 
 
 void JogoDama::intro() {

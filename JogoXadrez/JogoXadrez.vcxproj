@@ -142,6 +142,7 @@
     <ClCompile Include="JogoXadrez.cpp" />
     <ClCompile Include="PecaBase.cpp" />
     <ClCompile Include="PecaBispo.cpp" />
+    <ClCompile Include="PecaCavalo.cpp" />
     <ClCompile Include="PecaPiao.cpp" />
     <ClCompile Include="PecaTorre.cpp" />
     <ClCompile Include="Tabuleiro.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="JogoXadrez.h" />
     <ClInclude Include="PecaBase.h" />
     <ClInclude Include="PecaBispo.h" />
+    <ClInclude Include="PecaCavalo.h" />
     <ClInclude Include="PecaPiao.h" />
     <ClInclude Include="PecaTorre.h" />
     <ClInclude Include="Tabuleiro.h" />

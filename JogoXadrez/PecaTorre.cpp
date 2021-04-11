@@ -147,23 +147,7 @@ bool PecaTorre::validarJogadaBispoHorizontal(char** tabuleiroBackEnd) {
 
 bool PecaTorre::validarJogadaTorreCaptura(char** tabuleiroBackEnd) {
 
-	if (!validarJogadaTorreCapturaVertical(tabuleiroBackEnd)) {
-
-		return validarJogadaTorreCapturaHorizontal(tabuleiroBackEnd);
-	}
-	else {
-		return true;
-	}
-
-	return false;
-}
-
-bool PecaTorre::validarJogadaTorreCapturaVertical(char** tabuleiroBackEnd) {
-	return validarJogadaTorreVertical(tabuleiroBackEnd);
-}
-
-bool PecaTorre::validarJogadaTorreCapturaHorizontal(char** tabuleiroBackEnd) {
-	return validarJogadaBispoHorizontal(tabuleiroBackEnd);
+	return validarJogadaTorre(tabuleiroBackEnd);
 }
 
 bool PecaTorre::validarJogadaCorretaCaptura() {
