@@ -3,6 +3,7 @@
 #include "PecaBispo.h"
 #include "PecaTorre.h"
 #include "PecaCavalo.h"
+#include "PecaRainha.h"
 
 extern int	globalPlacarPretas,		
 			globalPlacarBrancas;	
@@ -134,7 +135,8 @@ void PecaBase::soltaPeca(char** tabuleiroBackEnd) {
 
 	if (globalPecaSelecionada == PECA_BRANCA_RAINHA || globalPecaSelecionada == PECA_PRETA_RAINHA)
 	{
-		//JOGA COM RAINHA
+		PecaRainha rainha;
+		rainha.jogarComRainha(tabuleiroBackEnd);
 	}
 
 	if (globalPecaSelecionada == PECA_BRANCA_REI || globalPecaSelecionada == PECA_PRETA_REI)

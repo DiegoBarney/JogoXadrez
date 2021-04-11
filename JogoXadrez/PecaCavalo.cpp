@@ -13,7 +13,6 @@ extern int		globalPlacarPretas,
 extern char		globalAvisos[1000];
 
 
-
 void soltaPecaAposValidacoesCavalo(char** tabuleiroBackEnd) {
 	//RETIRO A PECA DO LOCAL ANTERIOR 
 	tabuleiroBackEnd[globalLinhaPecaSelecionada][globalColunaPecaSelecionada] = VAZIO;

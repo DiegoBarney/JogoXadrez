@@ -77,7 +77,6 @@ void PecaBispo::jogarComBispo(char** tabuleiroBackEnd) {
 
 bool PecaBispo::validarJogadaBispo(char** tabuleiroBackEnd) {
 
-
 	if (!validarJogadaBispoDireita(tabuleiroBackEnd))
 	{
 		return validarJogadaBispoEsquerda(tabuleiroBackEnd);
@@ -86,7 +85,6 @@ bool PecaBispo::validarJogadaBispo(char** tabuleiroBackEnd) {
 		return true;
 	}
 
-	
 	return false;
 }
 
