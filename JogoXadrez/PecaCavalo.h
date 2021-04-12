@@ -15,5 +15,4 @@ private:
 	bool validarJogadaCavaloDireitaAcima(char** tabuleiroBackEnd);
 	bool validarJogadaCavaloDireitaAbaixo(char** tabuleiroBackEnd);
 	bool validarJogadaCavaloCaptura(char** tabuleiroBackEnd);
-	bool validarJogadaCorretaCapturaCavalo();
 };

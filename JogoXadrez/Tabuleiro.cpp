@@ -1,4 +1,5 @@
 #include "Tabuleiro.h"
+#include "Peca.h"
 
 char** Tabuleiro::organizaTabuleiroBackEndIncial() {
 	char** matriz = NULL;
@@ -161,9 +162,9 @@ void Tabuleiro::tabuleiroUserIterface(char** tabuleiroBackEnd) {
 		}
 	}
 	printf("\n\x1b[31m________________________________________________________________________________\n");
-	printf("\x1b[32mPlacar \x1b[34m%s: %d", globalPlayer2.nome, globalPlacarPretas);
-	printf("\n\x1b[32mPlacar \x1b[37m%s: %d\n", globalPlayer1.nome, globalPlacarBrancas);
-	printf("\x1b[32mAVISOS:\x1b[31m %s", globalAvisos);
+	printf("\x1b[32mPlacar \x1b[34m%s: %d", globalPlayer2.nome, Peca::globalPlacarPretas);
+	printf("\n\x1b[32mPlacar \x1b[37m%s: %d\n", globalPlayer1.nome, Peca::globalPlacarBrancas);
+	printf("\x1b[32mAVISOS:\x1b[31m %s", Peca::globalAvisos);
 
 }
 

@@ -11,5 +11,4 @@ private:
 	bool validarJogadaTorreVertical(char** tabuleiroBackEnd);
 	bool validarJogadaBispoHorizontal(char** tabuleiroBackEnd);
 	bool validarJogadaTorreCaptura(char** tabuleiroBackEnd);
-	bool validarJogadaCorretaCaptura();
 };

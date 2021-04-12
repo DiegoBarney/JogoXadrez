@@ -1,4 +1,5 @@
 #pragma once
+
 #include "CoreXadrez.h"
 #include "PecaBase.h"
 
@@ -9,21 +10,13 @@ struct dados_jogador
 	bool vencedor = false;
 };
 
-//Variavel global do placar do jogo	 ---//
-extern int	globalPlacarPretas,		//
-			globalPlacarBrancas;	//
-//--------------------------------------//
-
 //Variavel global adicionais do jogo -----------------------//
-extern char		globalAvisos[1000];							//
 															//		
 extern char		globalPecaDeveJogarAgora;					//
 															//
 extern dados_jogador	globalPlayer1,						//
 						globalPlayer2;						//
 //----------------------------------------------------------//
-
-
 
 class Tabuleiro {
 

@@ -20,6 +20,4 @@ public:
 private:
 	PecaBase(char** tabuleiroBackEnd);
 	void verificaSePiaoEvoluiu(char** tabuleiroBackEnd);
-	void soltaPecaAposValidacoes(char** tabuleiroBackEnd);
-
 };

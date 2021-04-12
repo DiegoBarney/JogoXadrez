@@ -1,52 +1,9 @@
 #include"PecaRainha.h"
-
-extern int		globalLinhaPecaSelecionada,
-				globalColunaPecaSelecionada;
-extern char		globalPecaSelecionada;
-
-extern int		globalLinhaPonteiro,
-				globalColunaPonteiro;
-extern char		globalPecaBackupDoPonteiro;
-
-extern int		globalPlacarPretas,
-				globalPlacarBrancas;
-extern char		globalAvisos[1000];
-
-
-void soltaPecaAposValidacoesRainha(char** tabuleiroBackEnd) {
-	//RETIRO A PECA DO LOCAL ANTERIOR 
-	tabuleiroBackEnd[globalLinhaPecaSelecionada][globalColunaPecaSelecionada] = VAZIO;
-
-	//SOLTO A PECA NO NOVO LOCAL / ELIMINO PECA INIMIGA
-	tabuleiroBackEnd[globalLinhaPonteiro][globalColunaPonteiro] = globalPecaSelecionada;
-
-	//VOLTO O BACKUP DE PECA ONDE O PONTEIRO ESTA LOCALIZADO
-	globalPecaBackupDoPonteiro = globalPecaSelecionada;
-
-	globalPecaSelecionada = VAZIO;
-}
-
-int validacoesDeCapturaPecaRainha(char** tabuleiroBackEnd, int linha, int coluna) {
-
-	if (tabuleiroBackEnd[linha][coluna] != VAZIO) {
-
-		if (tabuleiroBackEnd[linha][coluna] == PECA_SELECIONADA)
-		{
-			soltaPecaAposValidacoesRainha(tabuleiroBackEnd);
-			return VALIDACAO_CAPTURADA;
-		}
-		else
-		{
-			return VALIDACAO_ENCERRAR;
-		}
-	}
-
-	return VALIDACAO_CONTINUAR;
-}
+#include "Peca.h"
 
 void PecaRainha::jogarComRainha(char** tabuleiroBackEnd) {
 
-	if (globalPecaBackupDoPonteiro == VAZIO)
+	if (Peca::globalPecaBackupDoPonteiro == VAZIO)
 	{
 		if (validarJogadaRainha(tabuleiroBackEnd))
 		{
@@ -56,14 +13,14 @@ void PecaRainha::jogarComRainha(char** tabuleiroBackEnd) {
 			//avisos
 		}
 	}
-	else if (globalPecaBackupDoPonteiro != VAZIO && validarJogadaCorretaCapturaRainha()) {
+	else if (Peca::globalPecaBackupDoPonteiro != VAZIO && Peca::validarJogadaCorretaCapturaPecaExtras()) {
 
 		if (validarJogadaRainhaCaptura(tabuleiroBackEnd)) {
 
-			if (globalPecaBackupDoPonteiro == PECA_PRETA_RAINHA)
-				globalPlacarPretas++;
+			if (Peca::globalPecaBackupDoPonteiro == PECA_PRETA_RAINHA)
+				Peca::globalPlacarPretas++;
 			else
-				globalPlacarBrancas++;
+				Peca::globalPlacarBrancas++;
 
 			return;
 		}
@@ -106,8 +63,8 @@ bool PecaRainha::validarJogadaRainhaDiagonalDireita(char** tabuleiroBackEnd) {
 	int retorno;
 
 	//VALIDACAO DIAGONAL DIREITA ACIMA
-	for (int linha = (globalLinhaPonteiro - 1), coluna = (globalColunaPonteiro + 1); linha >= 0 && coluna < COLUNAS; linha--, coluna++) {
-		retorno = validacoesDeCapturaPecaRainha(tabuleiroBackEnd, linha, coluna);
+	for (int linha = (Peca::globalLinhaPonteiro - 1), coluna = (Peca::globalColunaPonteiro + 1); linha >= 0 && coluna < COLUNAS; linha--, coluna++) {
+		retorno = Peca::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
 
 		if (retorno == VALIDACAO_CAPTURADA)
 			return true;
@@ -116,8 +73,8 @@ bool PecaRainha::validarJogadaRainhaDiagonalDireita(char** tabuleiroBackEnd) {
 	}
 
 	//VALIDACAO DIAGONAL DIREITA A BAIXO
-	for (int linha = (globalLinhaPonteiro + 1), coluna = (globalColunaPonteiro + 1); linha < LINHAS && coluna < COLUNAS; linha++, coluna++) {
-		retorno = validacoesDeCapturaPecaRainha(tabuleiroBackEnd, linha, coluna);
+	for (int linha = (Peca::globalLinhaPonteiro + 1), coluna = (Peca::globalColunaPonteiro + 1); linha < LINHAS && coluna < COLUNAS; linha++, coluna++) {
+		retorno = Peca::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
 
 		if (retorno == VALIDACAO_CAPTURADA)
 			return true;
@@ -131,8 +88,8 @@ bool PecaRainha::validarJogadaRainhaDiagonalDireita(char** tabuleiroBackEnd) {
 bool PecaRainha::validarJogadaRainhaDiagonalEsquerda(char** tabuleiroBackEnd) {
 	int retorno;
 	//VALIDACAO DIAGONAL ESQUERDA ACIMA
-	for (int linha = (globalLinhaPonteiro - 1), coluna = (globalColunaPonteiro - 1); linha >= 0 && coluna >= 0; linha--, coluna--) {
-		retorno = validacoesDeCapturaPecaRainha(tabuleiroBackEnd, linha, coluna);
+	for (int linha = (Peca::globalLinhaPonteiro - 1), coluna = (Peca::globalColunaPonteiro - 1); linha >= 0 && coluna >= 0; linha--, coluna--) {
+		retorno = Peca::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
 		if (retorno == VALIDACAO_CAPTURADA)
 			return true;
 		if (retorno == VALIDACAO_ENCERRAR)
@@ -140,8 +97,8 @@ bool PecaRainha::validarJogadaRainhaDiagonalEsquerda(char** tabuleiroBackEnd) {
 	}
 
 	//VALIDACAO DIAGONAL ESQUERDA A BAIXO
-	for (int linha = (globalLinhaPonteiro + 1), coluna = (globalColunaPonteiro - 1); linha < LINHAS && coluna >= 0; linha++, coluna--) {
-		retorno = validacoesDeCapturaPecaRainha(tabuleiroBackEnd, linha, coluna);
+	for (int linha = (Peca::globalLinhaPonteiro + 1), coluna = (Peca::globalColunaPonteiro - 1); linha < LINHAS && coluna >= 0; linha++, coluna--) {
+		retorno = Peca::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
 		if (retorno == VALIDACAO_CAPTURADA)
 			return true;
 		if (retorno == VALIDACAO_ENCERRAR)
@@ -155,9 +112,9 @@ bool PecaRainha::validarJogadaRainhaVertical(char** tabuleiroBackEnd) {
 	int retorno;
 
 	//VERIFICA PECA LARGADA A BAIXO
-	for (int linha = (globalLinhaPonteiro - 1), coluna = globalColunaPonteiro; linha >= 0; linha--) {
+	for (int linha = (Peca::globalLinhaPonteiro - 1), coluna = Peca::globalColunaPonteiro; linha >= 0; linha--) {
 
-		retorno = validacoesDeCapturaPecaRainha(tabuleiroBackEnd, linha, coluna);
+		retorno = Peca::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
 
 		if (retorno == VALIDACAO_CAPTURADA)
 			return true;
@@ -167,8 +124,8 @@ bool PecaRainha::validarJogadaRainhaVertical(char** tabuleiroBackEnd) {
 	}
 
 	//VERIFICA PECA LARGADA ACIMA
-	for (int linha = (globalLinhaPonteiro + 1), coluna = globalColunaPonteiro; linha < LINHAS; linha++) {
-		retorno = validacoesDeCapturaPecaRainha(tabuleiroBackEnd, linha, coluna);
+	for (int linha = (Peca::globalLinhaPonteiro + 1), coluna = Peca::globalColunaPonteiro; linha < LINHAS; linha++) {
+		retorno = Peca::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
 
 		if (retorno == VALIDACAO_CAPTURADA)
 			return true;
@@ -183,8 +140,8 @@ bool PecaRainha::validarJogadaRainhaHorizontal(char** tabuleiroBackEnd) {
 	int retorno;
 
 	//VERIFICA PECA LARGADA A DIREITA
-	for (int linha = globalLinhaPonteiro, coluna = (globalColunaPonteiro - 1); coluna >= 0; coluna--) {
-		retorno = validacoesDeCapturaPecaRainha(tabuleiroBackEnd, linha, coluna);
+	for (int linha = Peca::globalLinhaPonteiro, coluna = (Peca::globalColunaPonteiro - 1); coluna >= 0; coluna--) {
+		retorno = Peca::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
 
 		if (retorno == VALIDACAO_CAPTURADA)
 			return true;
@@ -193,9 +150,9 @@ bool PecaRainha::validarJogadaRainhaHorizontal(char** tabuleiroBackEnd) {
 	}
 
 	//VERIFICA PECA LARGADA A ESQUERDA
-	for (int linha = globalLinhaPonteiro, coluna = (globalColunaPonteiro + 1); coluna < LINHAS; coluna++) {
+	for (int linha = Peca::globalLinhaPonteiro, coluna = (Peca::globalColunaPonteiro + 1); coluna < LINHAS; coluna++) {
 
-		retorno = validacoesDeCapturaPecaRainha(tabuleiroBackEnd, linha, coluna);
+		retorno = Peca::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
 
 		if (retorno == VALIDACAO_CAPTURADA)
 			return true;
@@ -208,21 +165,4 @@ bool PecaRainha::validarJogadaRainhaHorizontal(char** tabuleiroBackEnd) {
 
 bool PecaRainha::validarJogadaRainhaCaptura(char** tabuleiroBackEnd) {
 	return validarJogadaRainha(tabuleiroBackEnd);
-}
-
-bool PecaRainha::validarJogadaCorretaCapturaRainha() {
-	//JOGADA DA RAINHA BRANCA
-	if (((globalPecaBackupDoPonteiro == PECA_PRETA_TORRE || globalPecaBackupDoPonteiro == PECA_PRETA_CAVALO || globalPecaBackupDoPonteiro == PECA_PRETA_BISPO ||
-		globalPecaBackupDoPonteiro == PECA_PRETA_RAINHA || globalPecaBackupDoPonteiro == PECA_PRETA_REI || globalPecaBackupDoPonteiro == PECA_PRETA_PIAO)
-		&& globalPecaSelecionada == PECA_BRANCA_RAINHA) ||
-
-		//JOGADA DA RAINHA PRETA
-		((globalPecaBackupDoPonteiro == PECA_BRANCA_TORRE || globalPecaBackupDoPonteiro == PECA_BRANCA_CAVALO || globalPecaBackupDoPonteiro == PECA_BRANCA_BISPO ||
-			globalPecaBackupDoPonteiro == PECA_BRANCA_RAINHA || globalPecaBackupDoPonteiro == PECA_BRANCA_REI || globalPecaBackupDoPonteiro == PECA_BRANCA_PIAO)
-			&& globalPecaSelecionada == PECA_PRETA_RAINHA)) {
-
-		return true;
-	}
-
-	return false;
 }

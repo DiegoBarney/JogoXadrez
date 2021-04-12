@@ -3,16 +3,11 @@
 #include "Tabuleiro.h"
 #include "PecaBase.h"
 #include "TecladoJogo.h"
+#include "Peca.h"
 
-extern int				globalPlacarPretas = 0,		
-						globalPlacarBrancas = 0;	
-
-extern char				globalAvisos[1000] = {' '};					
-				
 //extern char				globalPecaDeveJogarAgora = PECA_BRANCA;		
 extern dados_jogador	globalPlayer1 = { " ", ' ', false },						
 						globalPlayer2 = { " ", ' ', false };						
-
 
 void JogoDama::intro() {
 	system("cls");
@@ -77,14 +72,14 @@ void JogoDama::capturaDadosJogador() {
 
 bool JogoDama::ehGanhador() {
 	
-	if (globalPlacarPretas == 12) {
+	if (Peca::globalPlacarPretas == 12) {
 
 		system("cls");
 		printf("\x1b[37m ############ Parabens \x1b[31m %s, voce venceu o Jogo\x1b[37m !!! ############\n\n", globalPlayer2.nome);
 		return true;
 	}
 
-	if (globalPlacarBrancas == 12) {
+	if (Peca::globalPlacarBrancas == 12) {
 
 		system("cls");
 		printf("\x1b[37m ############ Parabens \x1b[31m %s, voce venceu o Jogo\x1b[37m !!! ############\n\n", globalPlayer1.nome);

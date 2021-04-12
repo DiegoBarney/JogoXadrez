@@ -1,34 +1,33 @@
 #include "Peca.h"
 
-int		Peca::globalLinhaPecaSelecionada1,
-		Peca::globalColunaPecaSelecionada1;
+int		Peca::globalLinhaPecaSelecionada = 0,
+		Peca::globalColunaPecaSelecionada = 0;
 
-char	Peca::globalPecaSelecionada1;
+char	Peca::globalPecaSelecionada = VAZIO;
 
-int		Peca::globalLinhaPonteiro1,
-		Peca::globalColunaPonteiro1;
+int		Peca::globalLinhaPonteiro = 0,
+		Peca::globalColunaPonteiro = 0;
 
-char	Peca::globalPecaBackupDoPonteiro1;
+char	Peca::globalPecaBackupDoPonteiro = VAZIO;
 
-int		Peca::globalPlacarPretas1,
-		Peca::globalPlacarBrancas1;
+int		Peca::globalPlacarPretas = 0,
+		Peca::globalPlacarBrancas = 0;
 
-char	Peca::globalAvisos1[1000];
+char	Peca::globalAvisos[1000] = {' '};
 
-
-bool Peca::validarJogadaCorretaCapturaPeca() {
+bool Peca::validarJogadaCorretaCapturaPecaExtras() {
 
 	//JOGADA BRANCA
-	if (((globalPecaBackupDoPonteiro1 == PECA_PRETA_TORRE || globalPecaBackupDoPonteiro1 == PECA_PRETA_CAVALO || globalPecaBackupDoPonteiro1 == PECA_PRETA_BISPO ||
-		globalPecaBackupDoPonteiro1 == PECA_PRETA_RAINHA || globalPecaBackupDoPonteiro1 == PECA_PRETA_REI || globalPecaBackupDoPonteiro1 == PECA_PRETA_PIAO)
-		&& globalPecaSelecionada1 == PECA_BRANCA_TORRE || globalPecaSelecionada1 == PECA_BRANCA_CAVALO || globalPecaSelecionada1 == PECA_BRANCA_BISPO ||
-		globalPecaSelecionada1 == PECA_BRANCA_RAINHA || globalPecaSelecionada1 == PECA_BRANCA_REI || globalPecaSelecionada1 == PECA_BRANCA_PIAO) ||
+	if (((globalPecaBackupDoPonteiro == PECA_PRETA_TORRE || globalPecaBackupDoPonteiro == PECA_PRETA_CAVALO || globalPecaBackupDoPonteiro == PECA_PRETA_BISPO ||
+		globalPecaBackupDoPonteiro == PECA_PRETA_RAINHA || globalPecaBackupDoPonteiro == PECA_PRETA_REI || globalPecaBackupDoPonteiro == PECA_PRETA_PIAO)
+		&& globalPecaSelecionada == PECA_BRANCA_TORRE || globalPecaSelecionada == PECA_BRANCA_CAVALO || globalPecaSelecionada == PECA_BRANCA_BISPO ||
+		globalPecaSelecionada == PECA_BRANCA_RAINHA || globalPecaSelecionada == PECA_BRANCA_REI || globalPecaSelecionada == PECA_BRANCA_PIAO) ||
 
-		//JOGADA PRETO
-		((globalPecaBackupDoPonteiro1 == PECA_BRANCA_TORRE || globalPecaBackupDoPonteiro1 == PECA_BRANCA_CAVALO || globalPecaBackupDoPonteiro1 == PECA_BRANCA_BISPO ||
-			globalPecaBackupDoPonteiro1 == PECA_BRANCA_RAINHA ||globalPecaBackupDoPonteiro1 == PECA_BRANCA_REI || globalPecaBackupDoPonteiro1 == PECA_BRANCA_PIAO)
-			&& globalPecaSelecionada1 == PECA_PRETA_TORRE || globalPecaSelecionada1 == PECA_PRETA_CAVALO || globalPecaSelecionada1 == PECA_PRETA_BISPO ||
-			globalPecaSelecionada1 == PECA_PRETA_RAINHA || globalPecaSelecionada1 == PECA_PRETA_REI || globalPecaSelecionada1 == PECA_PRETA_PIAO)) {
+		//JOGADA PRETA
+		((globalPecaBackupDoPonteiro == PECA_BRANCA_TORRE || globalPecaBackupDoPonteiro == PECA_BRANCA_CAVALO || globalPecaBackupDoPonteiro == PECA_BRANCA_BISPO ||
+			globalPecaBackupDoPonteiro == PECA_BRANCA_RAINHA ||globalPecaBackupDoPonteiro == PECA_BRANCA_REI || globalPecaBackupDoPonteiro == PECA_BRANCA_PIAO)
+			&& globalPecaSelecionada == PECA_PRETA_TORRE || globalPecaSelecionada == PECA_PRETA_CAVALO || globalPecaSelecionada == PECA_PRETA_BISPO ||
+			globalPecaSelecionada == PECA_PRETA_RAINHA || globalPecaSelecionada == PECA_PRETA_REI || globalPecaSelecionada == PECA_PRETA_PIAO)) {
 
 		return true;
 	}
@@ -38,15 +37,15 @@ bool Peca::validarJogadaCorretaCapturaPeca() {
 
  void Peca::soltaPecaAposValidacoesExtras(char** tabuleiroBackEnd) {
 	 //RETIRO A PECA DO LOCAL ANTERIOR 
-	 tabuleiroBackEnd[globalLinhaPecaSelecionada1][globalColunaPecaSelecionada1] = VAZIO;
+	 tabuleiroBackEnd[globalLinhaPecaSelecionada][globalColunaPecaSelecionada] = VAZIO;
 
 	 //SOLTO A PECA NO NOVO LOCAL / ELIMINO PECA INIMIGA
-	 tabuleiroBackEnd[globalLinhaPonteiro1][globalColunaPonteiro1] = globalPecaSelecionada1;
+	 tabuleiroBackEnd[globalLinhaPonteiro][globalColunaPonteiro] = globalPecaSelecionada;
 
 	 //VOLTO O BACKUP DE PECA ONDE O PONTEIRO ESTA LOCALIZADO
-	 globalPecaBackupDoPonteiro1 = globalPecaSelecionada1;
+	 globalPecaBackupDoPonteiro = globalPecaSelecionada;
 
-	 globalPecaSelecionada1 = VAZIO;
+	 globalPecaSelecionada = VAZIO;
 }
 
  int Peca::validacoesDeCapturaPecaExtras(char** tabuleiroBackEnd, int linha, int coluna) {
