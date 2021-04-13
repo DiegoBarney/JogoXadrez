@@ -17,9 +17,12 @@ public:
 
 	static char		globalAvisos[1000];
 
+	static char		ultimaPecaEliminada;
+
 	static bool validarJogadaCorretaCapturaPecaExtras();
 	static void soltaPecaAposValidacoesExtras(char** tabuleiroBackEnd);
 	static int	validacoesDeCapturaPecaExtras(char** tabuleiroBackEnd, int linha, int coluna);
+	static void zerarInformacoes();
 
 private:
 	Peca();

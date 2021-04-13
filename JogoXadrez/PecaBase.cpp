@@ -4,6 +4,7 @@
 #include "PecaTorre.h"
 #include "PecaCavalo.h"
 #include "PecaRainha.h"
+#include "PecaRei.h"
 #include "Peca.h"
 
 
@@ -26,12 +27,7 @@ PecaBase::PecaBase(char** tabuleiroBackEnd) {
 }
 
 PecaBase::~PecaBase() {
-	Peca::globalLinhaPecaSelecionada = 0;
-	Peca::globalColunaPecaSelecionada = 0;
-	Peca::globalPecaSelecionada = ' ';
-	Peca::globalLinhaPonteiro = 0;
-	Peca::globalColunaPonteiro = 0;
-	Peca::globalPecaBackupDoPonteiro = ' ';
+	Peca::zerarInformacoes();
 	instance_ = nullptr;
 }
 
@@ -130,7 +126,8 @@ void PecaBase::soltaPeca(char** tabuleiroBackEnd) {
 
 	if (Peca::globalPecaSelecionada == PECA_BRANCA_REI || Peca::globalPecaSelecionada == PECA_PRETA_REI)
 	{
-		//JOGA COM REI
+		PecaRei rei;
+		rei.jogarComRei(tabuleiroBackEnd);
 	}
 
 	verificaSePiaoEvoluiu(tabuleiroBackEnd);

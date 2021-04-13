@@ -1,6 +1,8 @@
 #include "Tabuleiro.h"
 #include "Peca.h"
 
+
+
 char** Tabuleiro::organizaTabuleiroBackEndIncial() {
 	char** matriz = NULL;
 

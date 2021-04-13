@@ -13,21 +13,44 @@ char	Peca::globalPecaBackupDoPonteiro = VAZIO;
 int		Peca::globalPlacarPretas = 0,
 		Peca::globalPlacarBrancas = 0;
 
-char	Peca::globalAvisos[1000] = {' '};
+char	Peca::globalAvisos[1000] = {VAZIO};
+
+char	Peca::ultimaPecaEliminada = VAZIO;
+
+void Peca::zerarInformacoes() {
+
+	globalLinhaPecaSelecionada = 0,
+	globalColunaPecaSelecionada = 0;
+
+	globalPecaSelecionada = VAZIO;
+
+	globalLinhaPonteiro = 0,
+	globalColunaPonteiro = 0;
+
+	globalPecaBackupDoPonteiro = VAZIO;
+
+	globalPlacarPretas = 0,
+	globalPlacarBrancas = 0;
+	memcpy(globalAvisos, "", 999);
+	
+	ultimaPecaEliminada = VAZIO;
+}
 
 bool Peca::validarJogadaCorretaCapturaPecaExtras() {
 
 	//JOGADA BRANCA
-	if (((globalPecaBackupDoPonteiro == PECA_PRETA_TORRE || globalPecaBackupDoPonteiro == PECA_PRETA_CAVALO || globalPecaBackupDoPonteiro == PECA_PRETA_BISPO ||
+	if ( ( ( globalPecaBackupDoPonteiro == PECA_PRETA_TORRE || globalPecaBackupDoPonteiro == PECA_PRETA_CAVALO || globalPecaBackupDoPonteiro == PECA_PRETA_BISPO ||
 		globalPecaBackupDoPonteiro == PECA_PRETA_RAINHA || globalPecaBackupDoPonteiro == PECA_PRETA_REI || globalPecaBackupDoPonteiro == PECA_PRETA_PIAO)
-		&& globalPecaSelecionada == PECA_BRANCA_TORRE || globalPecaSelecionada == PECA_BRANCA_CAVALO || globalPecaSelecionada == PECA_BRANCA_BISPO ||
-		globalPecaSelecionada == PECA_BRANCA_RAINHA || globalPecaSelecionada == PECA_BRANCA_REI || globalPecaSelecionada == PECA_BRANCA_PIAO) ||
+
+		&& (globalPecaSelecionada == PECA_BRANCA_TORRE || globalPecaSelecionada == PECA_BRANCA_CAVALO || globalPecaSelecionada == PECA_BRANCA_BISPO ||
+		globalPecaSelecionada == PECA_BRANCA_RAINHA || globalPecaSelecionada == PECA_BRANCA_REI || globalPecaSelecionada == PECA_BRANCA_PIAO) ) ||
 
 		//JOGADA PRETA
-		((globalPecaBackupDoPonteiro == PECA_BRANCA_TORRE || globalPecaBackupDoPonteiro == PECA_BRANCA_CAVALO || globalPecaBackupDoPonteiro == PECA_BRANCA_BISPO ||
+		( (globalPecaBackupDoPonteiro == PECA_BRANCA_TORRE || globalPecaBackupDoPonteiro == PECA_BRANCA_CAVALO || globalPecaBackupDoPonteiro == PECA_BRANCA_BISPO ||
 			globalPecaBackupDoPonteiro == PECA_BRANCA_RAINHA ||globalPecaBackupDoPonteiro == PECA_BRANCA_REI || globalPecaBackupDoPonteiro == PECA_BRANCA_PIAO)
-			&& globalPecaSelecionada == PECA_PRETA_TORRE || globalPecaSelecionada == PECA_PRETA_CAVALO || globalPecaSelecionada == PECA_PRETA_BISPO ||
-			globalPecaSelecionada == PECA_PRETA_RAINHA || globalPecaSelecionada == PECA_PRETA_REI || globalPecaSelecionada == PECA_PRETA_PIAO)) {
+
+			&& (globalPecaSelecionada == PECA_PRETA_TORRE || globalPecaSelecionada == PECA_PRETA_CAVALO || globalPecaSelecionada == PECA_PRETA_BISPO ||
+			globalPecaSelecionada == PECA_PRETA_RAINHA || globalPecaSelecionada == PECA_PRETA_REI || globalPecaSelecionada == PECA_PRETA_PIAO) ) ) {
 
 		return true;
 	}
@@ -42,6 +65,8 @@ bool Peca::validarJogadaCorretaCapturaPecaExtras() {
 	 //SOLTO A PECA NO NOVO LOCAL / ELIMINO PECA INIMIGA
 	 tabuleiroBackEnd[globalLinhaPonteiro][globalColunaPonteiro] = globalPecaSelecionada;
 
+	 ultimaPecaEliminada = globalPecaBackupDoPonteiro;
+
 	 //VOLTO O BACKUP DE PECA ONDE O PONTEIRO ESTA LOCALIZADO
 	 globalPecaBackupDoPonteiro = globalPecaSelecionada;
 
@@ -55,6 +80,7 @@ bool Peca::validarJogadaCorretaCapturaPecaExtras() {
 		 if (tabuleiroBackEnd[linha][coluna] == PECA_SELECIONADA)
 		 {
 			 Peca::soltaPecaAposValidacoesExtras(tabuleiroBackEnd);
+
 			 return VALIDACAO_CAPTURADA;
 		 }
 		 else

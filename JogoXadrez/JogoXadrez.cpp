@@ -5,7 +5,6 @@
 #include "TecladoJogo.h"
 #include "Peca.h"
 
-//extern char				globalPecaDeveJogarAgora = PECA_BRANCA;		
 extern dados_jogador	globalPlayer1 = { " ", ' ', false },						
 						globalPlayer2 = { " ", ' ', false };						
 
@@ -72,14 +71,14 @@ void JogoDama::capturaDadosJogador() {
 
 bool JogoDama::ehGanhador() {
 	
-	if (Peca::globalPlacarPretas == 12) {
+	if (Peca::ultimaPecaEliminada == PECA_BRANCA_REI) {
 
 		system("cls");
 		printf("\x1b[37m ############ Parabens \x1b[31m %s, voce venceu o Jogo\x1b[37m !!! ############\n\n", globalPlayer2.nome);
 		return true;
 	}
 
-	if (Peca::globalPlacarBrancas == 12) {
+	if (Peca::ultimaPecaEliminada == PECA_PRETA_REI) {
 
 		system("cls");
 		printf("\x1b[37m ############ Parabens \x1b[31m %s, voce venceu o Jogo\x1b[37m !!! ############\n\n", globalPlayer1.nome);
@@ -96,6 +95,7 @@ int main() {
 	JogoDama jogo;
 	Tabuleiro tabuleiro;
 	TecladoJogo* TecladoJogo = TecladoJogo::getInstance();
+	PecaBase* pecaBase;
 
 	while (teclaDirecional != TECLA_MENU_OPCAO_SAIR) {
 
@@ -109,6 +109,7 @@ int main() {
 
 				jogo.capturaDadosJogador();
 				tabuleiroBackEnd = tabuleiro.organizaTabuleiroBackEndIncial();
+			
 				tabuleiro.movimentacaoNoTabuleiroBackEnd(tabuleiroBackEnd, TABULEIRO_PONTEIRO_INICIAL);
 
 				while (teclaDirecional != TECLA_GAMEPLAY_ACAO_SAIR_DO_JOGO && jogo.ehGanhador() == false) {
@@ -117,6 +118,8 @@ int main() {
 					tabuleiro.movimentacaoNoTabuleiroBackEnd(tabuleiroBackEnd, teclaDirecional);
 				}
 
+				pecaBase = PecaBase::getInstance(tabuleiroBackEnd);
+				pecaBase->~PecaBase();
 			break;
 
 			case TECLA_MENU_OPCAO_TUTORIAL:

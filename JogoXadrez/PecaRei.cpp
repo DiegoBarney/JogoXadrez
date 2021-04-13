@@ -17,7 +17,7 @@ void PecaRei::jogarComRei(char** tabuleiroBackEnd) {
 
 		if (validarJogadaReiCaptura(tabuleiroBackEnd)) {
 
-			if (Peca::globalPecaBackupDoPonteiro == PECA_PRETA_TORRE)
+			if (Peca::globalPecaBackupDoPonteiro == PECA_PRETA_REI)
 				Peca::globalPlacarPretas++;
 			else
 				Peca::globalPlacarBrancas++;
@@ -34,22 +34,58 @@ void PecaRei::jogarComRei(char** tabuleiroBackEnd) {
 }
 
 bool PecaRei::validarJogadaRei(char** tabuleiroBackEnd) {
+
+	if (!validarJogadaReiDiagonais(tabuleiroBackEnd))
+	{
+		if (validarJogadaReiLinhaReta(tabuleiroBackEnd))
+		{
+			return true;
+		}
+	}
+	else {
+		return true;
+	}
+
 	return false;
 }
 
-bool PecaRei::validarJogadaReiDireita(char** tabuleiroBackEnd) {
+bool PecaRei::validarJogadaReiDiagonais(char** tabuleiroBackEnd) {
+
+
+
+	if ((Peca::globalLinhaPecaSelecionada + 1) == Peca::globalLinhaPonteiro && (Peca::globalColunaPecaSelecionada + 1) == Peca::globalColunaPonteiro ||
+		(Peca::globalLinhaPecaSelecionada + 1) == Peca::globalLinhaPonteiro && (Peca::globalColunaPecaSelecionada - 1) == Peca::globalColunaPonteiro)
+	{
+		Peca::soltaPecaAposValidacoesExtras(tabuleiroBackEnd);
+		return true;
+	}
+
+	if ((Peca::globalLinhaPecaSelecionada - 1) == Peca::globalLinhaPonteiro && (Peca::globalColunaPecaSelecionada - 1) == Peca::globalColunaPonteiro ||
+		(Peca::globalLinhaPecaSelecionada - 1) == Peca::globalLinhaPonteiro && (Peca::globalColunaPecaSelecionada + 1) == Peca::globalColunaPonteiro) {
+
+		Peca::soltaPecaAposValidacoesExtras(tabuleiroBackEnd);
+		return true;
+	}
+
 	return false;
 }
 
-bool PecaRei::validarJogadaReiEsquerda(char** tabuleiroBackEnd) {
-	return false;
-}
+bool PecaRei::validarJogadaReiLinhaReta(char** tabuleiroBackEnd) {
 
-bool PecaRei::validarJogadaReiAcima(char** tabuleiroBackEnd) {
-	return false;
-}
+	if (((Peca::globalLinhaPecaSelecionada - 1) == Peca::globalLinhaPonteiro || (Peca::globalLinhaPecaSelecionada + 1) == Peca::globalLinhaPonteiro
+		) && Peca::globalColunaPecaSelecionada == Peca::globalColunaPonteiro)
+	{
+		Peca::soltaPecaAposValidacoesExtras(tabuleiroBackEnd);
+		return true;
+	}
 
-bool PecaRei::validarJogadaReiAbaixo(char** tabuleiroBackEnd) {
+	if (((Peca::globalColunaPecaSelecionada - 1) == Peca::globalColunaPonteiro || (Peca::globalColunaPecaSelecionada + 1) == Peca::globalColunaPonteiro
+		) && Peca::globalLinhaPecaSelecionada == Peca::globalLinhaPonteiro)
+	{
+		Peca::soltaPecaAposValidacoesExtras(tabuleiroBackEnd);
+		return true;
+	}
+
 	return false;
 }
 
