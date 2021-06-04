@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreXadrez.h"
 
-class JogoDama {
+class JogoXadrez {
 
 public:
 	void intro();

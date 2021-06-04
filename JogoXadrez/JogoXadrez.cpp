@@ -7,7 +7,7 @@
 extern dados_jogador	globalPlayer1 = { " ", ' ', false },						
 						globalPlayer2 = { " ", ' ', false };						
 
-void JogoDama::intro() {
+void JogoXadrez::intro() {
 	system("cls");
 	printf("\x1b[37m ############ Bem vindo ao jogo \x1b[31m XadrezBreuva\x1b[37m !!! ############\n\n");
 	printf("Pressione a tecla numero 1 para Comecar a jogar\n");
@@ -15,7 +15,7 @@ void JogoDama::intro() {
 	printf("Pressione a tecla numero 3 para Sair\n");
 }
 
-void JogoDama::imprimeTutorial()
+void JogoXadrez::imprimeTutorial()
 {
 	system("cls");
 	printf("##### Tutorial XadrezBreuva ######");
@@ -41,10 +41,11 @@ void JogoDama::imprimeTutorial()
 	printf("BI = Bispo.\n");
 	printf("RA = Rainha.\n");
 	printf("RE = Rei.\n");
-	printf("*  = Ponteiro do Jogo, serve para você se localizar no jogo, o mesmo movimenta ao apertar os direcionais.\n\n");
+	printf("*  = Ponteiro do Jogo, serve para você se localizar no jogo, o mesmo movimenta ao apertar os direcionais.\n");
+	printf("X  = Posicao da Peca que está selecionada no momento.\n\n");
 }
 
-void JogoDama::capturaDadosJogador() {
+void JogoXadrez::capturaDadosJogador() {
 	system("cls");
 	size_t tam;
 	printf("\x1b[37mDigite o nome do jogador que vai jogar com a peca BRANCA:");
@@ -61,7 +62,7 @@ void JogoDama::capturaDadosJogador() {
 	globalPlayer2.nome[tam-1] = '\0';
 }
 
-bool JogoDama::ehGanhador() {
+bool JogoXadrez::ehGanhador() {
 	
 	if (PecaBase::ultimaPecaEliminada == PECA_BRANCA_REI) {
 
@@ -84,7 +85,7 @@ bool JogoDama::ehGanhador() {
 int main() {
 	char** tabuleiroBackEnd; 
 	int teclaDirecional = 0;
-	JogoDama jogo;
+	JogoXadrez jogo;
 	Tabuleiro tabuleiro;
 	TecladoJogo* TecladoJogo = TecladoJogo::getInstance();
 	PecaBase* pecaBase;

@@ -5,7 +5,6 @@
 #include "PecaCavalo.h"
 #include "PecaRainha.h"
 #include "PecaRei.h"
-//#include "Peca.h"
 
 int		PecaBase::globalLinhaPecaSelecionada = 0,
 		PecaBase::globalColunaPecaSelecionada = 0;
@@ -125,7 +124,6 @@ void PecaBase::soltaPeca(char** tabuleiroBackEnd) {
 	{
 		PecaCavalo cavalo;
 		cavalo.jogarComCavalo(tabuleiroBackEnd);
-
 	}
 
 	if (globalPecaSelecionada == PECA_BRANCA_TORRE || globalPecaSelecionada == PECA_PRETA_TORRE)
