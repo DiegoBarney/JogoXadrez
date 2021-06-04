@@ -79,24 +79,29 @@ bool JogoXadrez::ehGanhador() {
 	}
 
 	return false;
+}
 
+void reorganizaDadosDasPecasAposSairDoJogo(char** tabuleiroBackEnd)
+{
+	PecaBase* pecaBase;
+	pecaBase = PecaBase::getInstance(tabuleiroBackEnd);
+	pecaBase->~PecaBase();
 }
 
 int main() {
 	char** tabuleiroBackEnd; 
-	int teclaDirecional = 0;
+	int TeclasCapturadasDoUsuario = 0;
 	JogoXadrez jogo;
 	Tabuleiro tabuleiro;
 	TecladoJogo* TecladoJogo = TecladoJogo::getInstance();
-	PecaBase* pecaBase;
 
-	while (teclaDirecional != TECLA_MENU_OPCAO_SAIR) {
+	while (TeclasCapturadasDoUsuario != TECLA_MENU_OPCAO_SAIR) {
 
 		jogo.intro();
 
-		teclaDirecional = TecladoJogo->capturaTeclado();
+		TeclasCapturadasDoUsuario = TecladoJogo->capturaTeclado();
 
-		switch (teclaDirecional) {
+		switch (TeclasCapturadasDoUsuario) {
 
 			case TECLA_MENU_OPCAO_JOGAR:
 
@@ -105,14 +110,16 @@ int main() {
 			
 				tabuleiro.movimentacaoNoTabuleiroBackEnd(tabuleiroBackEnd, TABULEIRO_PONTEIRO_INICIAL);
 
-				while (teclaDirecional != TECLA_GAMEPLAY_ACAO_SAIR_DO_JOGO && jogo.ehGanhador() == false) {
+				while (TeclasCapturadasDoUsuario != TECLA_GAMEPLAY_ACAO_SAIR_DO_JOGO && jogo.ehGanhador() == false) {
+
 					tabuleiro.tabuleiroUserIterface(tabuleiroBackEnd);
-					teclaDirecional = TecladoJogo->capturaTeclado();
-					tabuleiro.movimentacaoNoTabuleiroBackEnd(tabuleiroBackEnd, teclaDirecional);
+					TeclasCapturadasDoUsuario = TecladoJogo->capturaTeclado();
+					tabuleiro.movimentacaoNoTabuleiroBackEnd(tabuleiroBackEnd, TeclasCapturadasDoUsuario);
+
 				}
 
-				pecaBase = PecaBase::getInstance(tabuleiroBackEnd);
-				pecaBase->~PecaBase();
+				reorganizaDadosDasPecasAposSairDoJogo(tabuleiroBackEnd);
+
 			break;
 
 			case TECLA_MENU_OPCAO_TUTORIAL:
