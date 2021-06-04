@@ -1,9 +1,9 @@
 #include"PecaRainha.h"
-#include "Peca.h"
+#include "PecaBase.h"
 
 void PecaRainha::jogarComRainha(char** tabuleiroBackEnd) {
 
-	if (Peca::globalPecaBackupDoPonteiro == VAZIO)
+	if (PecaBase::globalPecaBackupDoPonteiro == VAZIO)
 	{
 		if (validarJogadaRainha(tabuleiroBackEnd))
 		{
@@ -13,14 +13,14 @@ void PecaRainha::jogarComRainha(char** tabuleiroBackEnd) {
 			//avisos
 		}
 	}
-	else if (Peca::globalPecaBackupDoPonteiro != VAZIO && Peca::validarJogadaCorretaCapturaPecaExtras()) {
+	else if (PecaBase::globalPecaBackupDoPonteiro != VAZIO && PecaBase::validarJogadaCorretaCapturaPecaExtras()) {
 
 		if (validarJogadaRainhaCaptura(tabuleiroBackEnd)) {
 
-			if (Peca::globalPecaBackupDoPonteiro == PECA_PRETA_RAINHA)
-				Peca::globalPlacarPretas++;
+			if (PecaBase::globalPecaBackupDoPonteiro == PECA_PRETA_RAINHA)
+				PecaBase::globalPlacarPretas++;
 			else
-				Peca::globalPlacarBrancas++;
+				PecaBase::globalPlacarBrancas++;
 
 			return;
 		}
@@ -63,8 +63,8 @@ bool PecaRainha::validarJogadaRainhaDiagonalDireita(char** tabuleiroBackEnd) {
 	int retorno;
 
 	//VALIDACAO DIAGONAL DIREITA ACIMA
-	for (int linha = (Peca::globalLinhaPonteiro - 1), coluna = (Peca::globalColunaPonteiro + 1); linha >= 0 && coluna < COLUNAS; linha--, coluna++) {
-		retorno = Peca::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
+	for (int linha = (PecaBase::globalLinhaPonteiro - 1), coluna = (PecaBase::globalColunaPonteiro + 1); linha >= 0 && coluna < COLUNAS; linha--, coluna++) {
+		retorno = PecaBase::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
 
 		if (retorno == VALIDACAO_CAPTURADA)
 			return true;
@@ -73,8 +73,8 @@ bool PecaRainha::validarJogadaRainhaDiagonalDireita(char** tabuleiroBackEnd) {
 	}
 
 	//VALIDACAO DIAGONAL DIREITA A BAIXO
-	for (int linha = (Peca::globalLinhaPonteiro + 1), coluna = (Peca::globalColunaPonteiro + 1); linha < LINHAS && coluna < COLUNAS; linha++, coluna++) {
-		retorno = Peca::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
+	for (int linha = (PecaBase::globalLinhaPonteiro + 1), coluna = (PecaBase::globalColunaPonteiro + 1); linha < LINHAS && coluna < COLUNAS; linha++, coluna++) {
+		retorno = PecaBase::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
 
 		if (retorno == VALIDACAO_CAPTURADA)
 			return true;
@@ -88,8 +88,8 @@ bool PecaRainha::validarJogadaRainhaDiagonalDireita(char** tabuleiroBackEnd) {
 bool PecaRainha::validarJogadaRainhaDiagonalEsquerda(char** tabuleiroBackEnd) {
 	int retorno;
 	//VALIDACAO DIAGONAL ESQUERDA ACIMA
-	for (int linha = (Peca::globalLinhaPonteiro - 1), coluna = (Peca::globalColunaPonteiro - 1); linha >= 0 && coluna >= 0; linha--, coluna--) {
-		retorno = Peca::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
+	for (int linha = (PecaBase::globalLinhaPonteiro - 1), coluna = (PecaBase::globalColunaPonteiro - 1); linha >= 0 && coluna >= 0; linha--, coluna--) {
+		retorno = PecaBase::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
 		if (retorno == VALIDACAO_CAPTURADA)
 			return true;
 		if (retorno == VALIDACAO_ENCERRAR)
@@ -97,8 +97,8 @@ bool PecaRainha::validarJogadaRainhaDiagonalEsquerda(char** tabuleiroBackEnd) {
 	}
 
 	//VALIDACAO DIAGONAL ESQUERDA A BAIXO
-	for (int linha = (Peca::globalLinhaPonteiro + 1), coluna = (Peca::globalColunaPonteiro - 1); linha < LINHAS && coluna >= 0; linha++, coluna--) {
-		retorno = Peca::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
+	for (int linha = (PecaBase::globalLinhaPonteiro + 1), coluna = (PecaBase::globalColunaPonteiro - 1); linha < LINHAS && coluna >= 0; linha++, coluna--) {
+		retorno = PecaBase::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
 		if (retorno == VALIDACAO_CAPTURADA)
 			return true;
 		if (retorno == VALIDACAO_ENCERRAR)
@@ -112,9 +112,9 @@ bool PecaRainha::validarJogadaRainhaVertical(char** tabuleiroBackEnd) {
 	int retorno;
 
 	//VERIFICA PECA LARGADA A BAIXO
-	for (int linha = (Peca::globalLinhaPonteiro - 1), coluna = Peca::globalColunaPonteiro; linha >= 0; linha--) {
+	for (int linha = (PecaBase::globalLinhaPonteiro - 1), coluna = PecaBase::globalColunaPonteiro; linha >= 0; linha--) {
 
-		retorno = Peca::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
+		retorno = PecaBase::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
 
 		if (retorno == VALIDACAO_CAPTURADA)
 			return true;
@@ -124,8 +124,8 @@ bool PecaRainha::validarJogadaRainhaVertical(char** tabuleiroBackEnd) {
 	}
 
 	//VERIFICA PECA LARGADA ACIMA
-	for (int linha = (Peca::globalLinhaPonteiro + 1), coluna = Peca::globalColunaPonteiro; linha < LINHAS; linha++) {
-		retorno = Peca::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
+	for (int linha = (PecaBase::globalLinhaPonteiro + 1), coluna = PecaBase::globalColunaPonteiro; linha < LINHAS; linha++) {
+		retorno = PecaBase::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
 
 		if (retorno == VALIDACAO_CAPTURADA)
 			return true;
@@ -140,8 +140,8 @@ bool PecaRainha::validarJogadaRainhaHorizontal(char** tabuleiroBackEnd) {
 	int retorno;
 
 	//VERIFICA PECA LARGADA A DIREITA
-	for (int linha = Peca::globalLinhaPonteiro, coluna = (Peca::globalColunaPonteiro - 1); coluna >= 0; coluna--) {
-		retorno = Peca::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
+	for (int linha = PecaBase::globalLinhaPonteiro, coluna = (PecaBase::globalColunaPonteiro - 1); coluna >= 0; coluna--) {
+		retorno = PecaBase::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
 
 		if (retorno == VALIDACAO_CAPTURADA)
 			return true;
@@ -150,9 +150,9 @@ bool PecaRainha::validarJogadaRainhaHorizontal(char** tabuleiroBackEnd) {
 	}
 
 	//VERIFICA PECA LARGADA A ESQUERDA
-	for (int linha = Peca::globalLinhaPonteiro, coluna = (Peca::globalColunaPonteiro + 1); coluna < LINHAS; coluna++) {
+	for (int linha = PecaBase::globalLinhaPonteiro, coluna = (PecaBase::globalColunaPonteiro + 1); coluna < LINHAS; coluna++) {
 
-		retorno = Peca::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
+		retorno = PecaBase::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
 
 		if (retorno == VALIDACAO_CAPTURADA)
 			return true;

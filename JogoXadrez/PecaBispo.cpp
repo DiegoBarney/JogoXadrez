@@ -1,9 +1,9 @@
 #include "PecaBispo.h"
-#include "Peca.h"
+#include "PecaBase.h"
 
 void PecaBispo::jogarComBispo(char** tabuleiroBackEnd) {
 
-	if (Peca::globalPecaBackupDoPonteiro == VAZIO)
+	if (PecaBase::globalPecaBackupDoPonteiro == VAZIO)
 	{
 		if (validarJogadaBispo(tabuleiroBackEnd))
 		{
@@ -13,14 +13,14 @@ void PecaBispo::jogarComBispo(char** tabuleiroBackEnd) {
 			//avisos
 		}
 	}
-	else if(Peca::globalPecaBackupDoPonteiro != VAZIO && Peca::validarJogadaCorretaCapturaPecaExtras()) {
+	else if(PecaBase::globalPecaBackupDoPonteiro != VAZIO && PecaBase::validarJogadaCorretaCapturaPecaExtras()) {
 
 		if (validarJogadaBispoCaptura(tabuleiroBackEnd)) {
 
-			if (Peca::globalPecaBackupDoPonteiro == PECA_PRETA_BISPO)
-				Peca::globalPlacarPretas++;
+			if (PecaBase::globalPecaBackupDoPonteiro == PECA_PRETA_BISPO)
+				PecaBase::globalPlacarPretas++;
 			else
-				Peca::globalPlacarBrancas++;
+				PecaBase::globalPlacarBrancas++;
 
 			return;
 		}
@@ -50,8 +50,8 @@ bool PecaBispo::validarJogadaBispoDireita(char** tabuleiroBackEnd) {
 	int retorno;
 
 	//VALIDACAO DIAGONAL DIREITA ACIMA
-	for (int linha = (Peca::globalLinhaPonteiro - 1), coluna = (Peca::globalColunaPonteiro + 1); linha >= 0 && coluna < COLUNAS; linha--, coluna++) {
-		retorno = Peca::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
+	for (int linha = (PecaBase::globalLinhaPonteiro - 1), coluna = (PecaBase::globalColunaPonteiro + 1); linha >= 0 && coluna < COLUNAS; linha--, coluna++) {
+		retorno = PecaBase::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
 
 		if (retorno == VALIDACAO_CAPTURADA)
 			return true;
@@ -60,8 +60,8 @@ bool PecaBispo::validarJogadaBispoDireita(char** tabuleiroBackEnd) {
 	}
 
 	//VALIDACAO DIAGONAL DIREITA A BAIXO
-	for (int linha = (Peca::globalLinhaPonteiro + 1), coluna = (Peca::globalColunaPonteiro + 1); linha < LINHAS && coluna < COLUNAS; linha++, coluna++) {
-		retorno = Peca::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
+	for (int linha = (PecaBase::globalLinhaPonteiro + 1), coluna = (PecaBase::globalColunaPonteiro + 1); linha < LINHAS && coluna < COLUNAS; linha++, coluna++) {
+		retorno = PecaBase::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
 
 		if (retorno == VALIDACAO_CAPTURADA)
 			return true;
@@ -75,8 +75,8 @@ bool PecaBispo::validarJogadaBispoDireita(char** tabuleiroBackEnd) {
 bool PecaBispo::validarJogadaBispoEsquerda(char** tabuleiroBackEnd) {
 	int retorno;
 	//VALIDACAO DIAGONAL ESQUERDA ACIMA
-	for (int linha = (Peca::globalLinhaPonteiro - 1), coluna = (Peca::globalColunaPonteiro - 1); linha >= 0 && coluna >= 0; linha--, coluna--) {
-		retorno = Peca::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
+	for (int linha = (PecaBase::globalLinhaPonteiro - 1), coluna = (PecaBase::globalColunaPonteiro - 1); linha >= 0 && coluna >= 0; linha--, coluna--) {
+		retorno = PecaBase::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
 		if (retorno == VALIDACAO_CAPTURADA)
 			return true;
 		if (retorno == VALIDACAO_ENCERRAR)
@@ -84,8 +84,8 @@ bool PecaBispo::validarJogadaBispoEsquerda(char** tabuleiroBackEnd) {
 	}
 
 	//VALIDACAO DIAGONAL ESQUERDA A BAIXO
-	for (int linha = (Peca::globalLinhaPonteiro + 1), coluna = (Peca::globalColunaPonteiro - 1); linha < LINHAS && coluna >= 0; linha++, coluna--) {
-		retorno = Peca::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
+	for (int linha = (PecaBase::globalLinhaPonteiro + 1), coluna = (PecaBase::globalColunaPonteiro - 1); linha < LINHAS && coluna >= 0; linha++, coluna--) {
+		retorno = PecaBase::validacoesDeCapturaPecaExtras(tabuleiroBackEnd, linha, coluna);
 		if (retorno == VALIDACAO_CAPTURADA)
 			return true;
 		if (retorno == VALIDACAO_ENCERRAR)

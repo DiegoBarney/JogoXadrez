@@ -3,7 +3,6 @@
 #include "Tabuleiro.h"
 #include "PecaBase.h"
 #include "TecladoJogo.h"
-#include "Peca.h"
 
 extern dados_jogador	globalPlayer1 = { " ", ' ', false },						
 						globalPlayer2 = { " ", ' ', false };						
@@ -21,35 +20,28 @@ void JogoDama::imprimeTutorial()
 	system("cls");
 	printf("##### Tutorial XadrezBreuva ######");
 
-	printf("\n\nControles do Jogo:\n");
-	printf("Direcional para cima.\n");
-	printf("Direcional para baixo.\n");
-	printf("Direcional para esquerda.\n");
-	printf("Direcional para direita.\n");
-	printf("F1 Seleciona Peca.\n");
-	printf("F2 Solta Peca.\n");
-	printf("F3 Cancelar Jogada, volta a peca que estava movimentando para sua posicao original.\n");
-	printf("F9 Sair do jogo\n");
+	printf("\n\x1b[33mControles do Jogo:");
 
-	printf("\n\nMovimentacao no tabuleiro:\n");
-	printf("Direcional para cima.\n");
+	printf("\n\n\x1b[31mMovimentacao no tabuleiro:\n");
+	printf("\x1b[37mDirecional para cima.\n");
 	printf("Direcional para baixo.\n");
 	printf("Direcional para esquerda.\n");
 	printf("Direcional para direita.\n");
 
-	printf("\n\nMovimentacao das pecas no tabuleiro:\n");
-	printf("Passo 1: Selecionar peca pressionando F1.\n");
+	printf("\n\n\x1b[31mMovimentacao das pecas no tabuleiro:\n");
+	printf("\x1b[37mPasso 1: Selecionar peca pressionando F1.\n");
 	printf("Passo 2: Usar os direcionais para escolher uma casa onde a peca vai ficar.\n");
 	printf("Passo 3: Soltar a peca pressionando F2.\n");
 	printf("Passo 4: Repetir o processo para todas as jogadas.\n");
 
-	printf("\n\nSignificados de siglas do jogo:\n");
-	printf("P = Peca Preta.\n");
-	printf("B = Peca Branca.\n");
-	printf("W = Peca Branca Dama.\n");
-	printf("X = Peca Preta Dama.\n");
-	printf("C = Posicao onde foi capturada a Peca.\n");
-	printf("T = Ponteiro onde o jogador esta localizado na movimentacão.\n\n");
+	printf("\n\n\x1b[31mSignificados de siglas do jogo:\n");
+	printf("\x1b[37mPI = Piao.\n");
+	printf("TO = Torre.\n");
+	printf("CA = Cavalo.\n");
+	printf("BI = Bispo.\n");
+	printf("RA = Rainha.\n");
+	printf("RE = Rei.\n");
+	printf("*  = Ponteiro do Jogo, serve para você se localizar no jogo, o mesmo movimenta ao apertar os direcionais.\n\n");
 }
 
 void JogoDama::capturaDadosJogador() {
@@ -71,14 +63,14 @@ void JogoDama::capturaDadosJogador() {
 
 bool JogoDama::ehGanhador() {
 	
-	if (Peca::ultimaPecaEliminada == PECA_BRANCA_REI) {
+	if (PecaBase::ultimaPecaEliminada == PECA_BRANCA_REI) {
 
 		system("cls");
 		printf("\x1b[37m ############ Parabens \x1b[31m %s, voce venceu o Jogo\x1b[37m !!! ############\n\n", globalPlayer2.nome);
 		return true;
 	}
 
-	if (Peca::ultimaPecaEliminada == PECA_PRETA_REI) {
+	if (PecaBase::ultimaPecaEliminada == PECA_PRETA_REI) {
 
 		system("cls");
 		printf("\x1b[37m ############ Parabens \x1b[31m %s, voce venceu o Jogo\x1b[37m !!! ############\n\n", globalPlayer1.nome);

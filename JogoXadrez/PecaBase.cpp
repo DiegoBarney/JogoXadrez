@@ -5,8 +5,24 @@
 #include "PecaCavalo.h"
 #include "PecaRainha.h"
 #include "PecaRei.h"
-#include "Peca.h"
+//#include "Peca.h"
 
+int		PecaBase::globalLinhaPecaSelecionada = 0,
+		PecaBase::globalColunaPecaSelecionada = 0;
+
+char	PecaBase::globalPecaSelecionada = VAZIO;
+
+int		PecaBase::globalLinhaPonteiro = 0,
+		PecaBase::globalColunaPonteiro = 0;
+
+char	PecaBase::globalPecaBackupDoPonteiro = VAZIO;
+
+int		PecaBase::globalPlacarPretas = 0,
+		PecaBase::globalPlacarBrancas = 0;
+
+char	PecaBase::globalAvisos[1000] = { VAZIO };
+
+char	PecaBase::ultimaPecaEliminada = VAZIO;
 
 static PecaBase* instance_;
 
@@ -22,109 +38,109 @@ PecaBase* PecaBase::getInstance(char** tabuleiroBackEnd)
 
 PecaBase::PecaBase(char** tabuleiroBackEnd) {
 
-	Peca::globalPecaBackupDoPonteiro = tabuleiroBackEnd[Peca::globalLinhaPonteiro][Peca::globalColunaPonteiro];
-	tabuleiroBackEnd[Peca::globalLinhaPonteiro][Peca::globalColunaPonteiro] = PONTEIRO_DIRECIONAL;
+	globalPecaBackupDoPonteiro = tabuleiroBackEnd[globalLinhaPonteiro][globalColunaPonteiro];
+	tabuleiroBackEnd[globalLinhaPonteiro][globalColunaPonteiro] = PONTEIRO_DIRECIONAL;
 }
 
 PecaBase::~PecaBase() {
-	Peca::zerarInformacoes();
+	PecaBase::zerarInformacoes();
 	instance_ = nullptr;
 }
 
 void PecaBase::moveParaDireita(char** tabuleiroBackEnd){
 
-	if (Peca::globalColunaPonteiro >= 0 && Peca::globalColunaPonteiro < (LINHAS -1) )
+	if (globalColunaPonteiro >= 0 && globalColunaPonteiro < (LINHAS -1) )
 	{
-		tabuleiroBackEnd[Peca::globalLinhaPonteiro][Peca::globalColunaPonteiro] = Peca::globalPecaBackupDoPonteiro;
-		Peca::globalColunaPonteiro++;
-		Peca::globalPecaBackupDoPonteiro = tabuleiroBackEnd[Peca::globalLinhaPonteiro][Peca::globalColunaPonteiro];
-		tabuleiroBackEnd[Peca::globalLinhaPonteiro][Peca::globalColunaPonteiro] = PONTEIRO_DIRECIONAL;
+		tabuleiroBackEnd[globalLinhaPonteiro][globalColunaPonteiro] = globalPecaBackupDoPonteiro;
+		globalColunaPonteiro++;
+		globalPecaBackupDoPonteiro = tabuleiroBackEnd[globalLinhaPonteiro][globalColunaPonteiro];
+		tabuleiroBackEnd[globalLinhaPonteiro][globalColunaPonteiro] = PONTEIRO_DIRECIONAL;
 	}
 }
 
 void PecaBase::moveParaEsquerda(char** tabuleiroBackEnd) {
 
-	if (Peca::globalColunaPonteiro > 0 && Peca::globalColunaPonteiro <= (LINHAS - 1) )
+	if (globalColunaPonteiro > 0 &&	globalColunaPonteiro <= (LINHAS - 1) )
 	{
-		tabuleiroBackEnd[Peca::globalLinhaPonteiro][Peca::globalColunaPonteiro] = Peca::globalPecaBackupDoPonteiro;
-		Peca::globalColunaPonteiro--;
-		Peca::globalPecaBackupDoPonteiro = tabuleiroBackEnd[Peca::globalLinhaPonteiro][Peca::globalColunaPonteiro];
-		tabuleiroBackEnd[Peca::globalLinhaPonteiro][Peca::globalColunaPonteiro] = PONTEIRO_DIRECIONAL;
+		tabuleiroBackEnd[globalLinhaPonteiro][globalColunaPonteiro] = globalPecaBackupDoPonteiro;
+		globalColunaPonteiro--;
+		globalPecaBackupDoPonteiro = tabuleiroBackEnd[globalLinhaPonteiro][globalColunaPonteiro];
+		tabuleiroBackEnd[globalLinhaPonteiro][globalColunaPonteiro] = PONTEIRO_DIRECIONAL;
 	}
 }
 
 void PecaBase::moveParaCima(char** tabuleiroBackEnd) {
 
-	if (Peca::globalLinhaPonteiro > 0 && Peca::globalLinhaPonteiro <= (LINHAS - 1) )
+	if (globalLinhaPonteiro > 0 && globalLinhaPonteiro <= (LINHAS - 1) )
 	{
-		tabuleiroBackEnd[Peca::globalLinhaPonteiro][Peca::globalColunaPonteiro] = Peca::globalPecaBackupDoPonteiro;
-		Peca::globalLinhaPonteiro--;
-		Peca::globalPecaBackupDoPonteiro = tabuleiroBackEnd[Peca::globalLinhaPonteiro][Peca::globalColunaPonteiro];
-		tabuleiroBackEnd[Peca::globalLinhaPonteiro][Peca::globalColunaPonteiro] = PONTEIRO_DIRECIONAL;
+		tabuleiroBackEnd[globalLinhaPonteiro][globalColunaPonteiro] = globalPecaBackupDoPonteiro;
+		globalLinhaPonteiro--;
+		globalPecaBackupDoPonteiro = tabuleiroBackEnd[globalLinhaPonteiro][globalColunaPonteiro];
+		tabuleiroBackEnd[globalLinhaPonteiro][globalColunaPonteiro] = PONTEIRO_DIRECIONAL;
 	}
 }
 
 void PecaBase::moveParaBaixo(char** tabuleiroBackEnd) {
 
-	if (Peca::globalLinhaPonteiro >= 0 && Peca::globalLinhaPonteiro < (LINHAS - 1) )
+	if (globalLinhaPonteiro >= 0 && globalLinhaPonteiro < (LINHAS - 1) )
 	{
-		tabuleiroBackEnd[Peca::globalLinhaPonteiro][Peca::globalColunaPonteiro] = Peca::globalPecaBackupDoPonteiro;
-		Peca::globalLinhaPonteiro++;
-		Peca::globalPecaBackupDoPonteiro = tabuleiroBackEnd[Peca::globalLinhaPonteiro][Peca::globalColunaPonteiro];
-		tabuleiroBackEnd[Peca::globalLinhaPonteiro][Peca::globalColunaPonteiro] = PONTEIRO_DIRECIONAL;
+		tabuleiroBackEnd[globalLinhaPonteiro][globalColunaPonteiro] = globalPecaBackupDoPonteiro;
+		globalLinhaPonteiro++;
+		globalPecaBackupDoPonteiro = tabuleiroBackEnd[globalLinhaPonteiro][globalColunaPonteiro];
+		tabuleiroBackEnd[globalLinhaPonteiro][globalColunaPonteiro] = PONTEIRO_DIRECIONAL;
 	}
 }
 
 void PecaBase::pegaPeca(char** tabuleiroBackEnd) {
 
-	if (Peca::globalPecaBackupDoPonteiro != VAZIO && Peca::globalPecaSelecionada == VAZIO)
+	if (globalPecaBackupDoPonteiro != VAZIO && globalPecaSelecionada == VAZIO)
 	{
 		//CAPTURO PECA
-		Peca::globalPecaSelecionada = Peca::globalPecaBackupDoPonteiro;
+		globalPecaSelecionada = globalPecaBackupDoPonteiro;
 
 		//ADICIONO O NO LOCAL 
-		Peca::globalPecaBackupDoPonteiro = PECA_SELECIONADA;
+		globalPecaBackupDoPonteiro = PECA_SELECIONADA;
 
 		//GUARDO A LOCALIZACAO DA PECA ANTERIOR
-		Peca::globalLinhaPecaSelecionada = Peca::globalLinhaPonteiro;
-		Peca::globalColunaPecaSelecionada = Peca::globalColunaPonteiro;
+		globalLinhaPecaSelecionada = globalLinhaPonteiro;
+		globalColunaPecaSelecionada = globalColunaPonteiro;
 	}
 }
 
 void PecaBase::soltaPeca(char** tabuleiroBackEnd) {
 
-	if (Peca::globalPecaSelecionada == PECA_PRETA_PIAO || Peca::globalPecaSelecionada == PECA_BRANCA_PIAO)
+	if (globalPecaSelecionada == PECA_PRETA_PIAO || globalPecaSelecionada == PECA_BRANCA_PIAO)
 	{
 		PecaPiao piao;
 		piao.jogarComPiao(tabuleiroBackEnd);
 	}
 
-	if (Peca::globalPecaSelecionada == PECA_BRANCA_BISPO || Peca::globalPecaSelecionada == PECA_PRETA_BISPO)
+	if (globalPecaSelecionada == PECA_BRANCA_BISPO || globalPecaSelecionada == PECA_PRETA_BISPO)
 	{
 		PecaBispo bispo;
 		bispo.jogarComBispo(tabuleiroBackEnd);
 	}
 
-	if (Peca::globalPecaSelecionada == PECA_BRANCA_CAVALO || Peca::globalPecaSelecionada == PECA_PRETA_CAVALO)
+	if (globalPecaSelecionada == PECA_BRANCA_CAVALO || globalPecaSelecionada == PECA_PRETA_CAVALO)
 	{
 		PecaCavalo cavalo;
 		cavalo.jogarComCavalo(tabuleiroBackEnd);
 
 	}
 
-	if (Peca::globalPecaSelecionada == PECA_BRANCA_TORRE || Peca::globalPecaSelecionada == PECA_PRETA_TORRE)
+	if (globalPecaSelecionada == PECA_BRANCA_TORRE || globalPecaSelecionada == PECA_PRETA_TORRE)
 	{
 		PecaTorre torre;
 		torre.jogarComTorre(tabuleiroBackEnd);
 	}
 
-	if (Peca::globalPecaSelecionada == PECA_BRANCA_RAINHA || Peca::globalPecaSelecionada == PECA_PRETA_RAINHA)
+	if (globalPecaSelecionada == PECA_BRANCA_RAINHA || globalPecaSelecionada == PECA_PRETA_RAINHA)
 	{
 		PecaRainha rainha;
 		rainha.jogarComRainha(tabuleiroBackEnd);
 	}
 
-	if (Peca::globalPecaSelecionada == PECA_BRANCA_REI || Peca::globalPecaSelecionada == PECA_PRETA_REI)
+	if (globalPecaSelecionada == PECA_BRANCA_REI || globalPecaSelecionada == PECA_PRETA_REI)
 	{
 		PecaRei rei;
 		rei.jogarComRei(tabuleiroBackEnd);
@@ -135,15 +151,15 @@ void PecaBase::soltaPeca(char** tabuleiroBackEnd) {
 
 void PecaBase::cancelaJogada(char** tabuleiroBackEnd) {
 
-	if (Peca::globalPecaSelecionada != VAZIO) {
-		tabuleiroBackEnd[Peca::globalLinhaPecaSelecionada][Peca::globalColunaPecaSelecionada] = Peca::globalPecaSelecionada;
+	if (PecaBase::globalPecaSelecionada != VAZIO) {
+		tabuleiroBackEnd[globalLinhaPecaSelecionada][globalColunaPecaSelecionada] = globalPecaSelecionada;
 
-		if (Peca::globalPecaBackupDoPonteiro == PECA_SELECIONADA)
+		if (globalPecaBackupDoPonteiro == PECA_SELECIONADA)
 		{
-			Peca::globalPecaBackupDoPonteiro = Peca::globalPecaSelecionada;
+			globalPecaBackupDoPonteiro = globalPecaSelecionada;
 		}
 
-		Peca::globalPecaSelecionada = VAZIO;
+		globalPecaSelecionada = VAZIO;
 	}
 }
 
@@ -165,4 +181,77 @@ void PecaBase::verificaSePiaoEvoluiu(char** tabuleiroBackEnd) {
 	}*/
 }
 
+void PecaBase::zerarInformacoes() {
 
+	globalLinhaPecaSelecionada = 0,
+		globalColunaPecaSelecionada = 0;
+
+	globalPecaSelecionada = VAZIO;
+
+	globalLinhaPonteiro = 0,
+		globalColunaPonteiro = 0;
+
+	globalPecaBackupDoPonteiro = VAZIO;
+
+	globalPlacarPretas = 0,
+		globalPlacarBrancas = 0;
+	memcpy(globalAvisos, "", 999);
+
+	ultimaPecaEliminada = VAZIO;
+}
+
+bool PecaBase::validarJogadaCorretaCapturaPecaExtras() {
+
+	//JOGADA BRANCA
+	if (((globalPecaBackupDoPonteiro == PECA_PRETA_TORRE || globalPecaBackupDoPonteiro == PECA_PRETA_CAVALO || globalPecaBackupDoPonteiro == PECA_PRETA_BISPO ||
+		globalPecaBackupDoPonteiro == PECA_PRETA_RAINHA || globalPecaBackupDoPonteiro == PECA_PRETA_REI || globalPecaBackupDoPonteiro == PECA_PRETA_PIAO)
+
+		&& (globalPecaSelecionada == PECA_BRANCA_TORRE || globalPecaSelecionada == PECA_BRANCA_CAVALO || globalPecaSelecionada == PECA_BRANCA_BISPO ||
+			globalPecaSelecionada == PECA_BRANCA_RAINHA || globalPecaSelecionada == PECA_BRANCA_REI || globalPecaSelecionada == PECA_BRANCA_PIAO)) ||
+
+		//JOGADA PRETA
+		((globalPecaBackupDoPonteiro == PECA_BRANCA_TORRE || globalPecaBackupDoPonteiro == PECA_BRANCA_CAVALO || globalPecaBackupDoPonteiro == PECA_BRANCA_BISPO ||
+			globalPecaBackupDoPonteiro == PECA_BRANCA_RAINHA || globalPecaBackupDoPonteiro == PECA_BRANCA_REI || globalPecaBackupDoPonteiro == PECA_BRANCA_PIAO)
+
+			&& (globalPecaSelecionada == PECA_PRETA_TORRE || globalPecaSelecionada == PECA_PRETA_CAVALO || globalPecaSelecionada == PECA_PRETA_BISPO ||
+				globalPecaSelecionada == PECA_PRETA_RAINHA || globalPecaSelecionada == PECA_PRETA_REI || globalPecaSelecionada == PECA_PRETA_PIAO))) {
+
+		return true;
+	}
+
+	return false;
+}
+
+void PecaBase::soltaPecaAposValidacoesExtras(char** tabuleiroBackEnd) {
+	//RETIRO A PECA DO LOCAL ANTERIOR 
+	tabuleiroBackEnd[globalLinhaPecaSelecionada][globalColunaPecaSelecionada] = VAZIO;
+
+	//SOLTO A PECA NO NOVO LOCAL / ELIMINO PECA INIMIGA
+	tabuleiroBackEnd[globalLinhaPonteiro][globalColunaPonteiro] = globalPecaSelecionada;
+
+	ultimaPecaEliminada = globalPecaBackupDoPonteiro;
+
+	//VOLTO O BACKUP DE PECA ONDE O PONTEIRO ESTA LOCALIZADO
+	globalPecaBackupDoPonteiro = globalPecaSelecionada;
+
+	globalPecaSelecionada = VAZIO;
+}
+
+int PecaBase::validacoesDeCapturaPecaExtras(char** tabuleiroBackEnd, int linha, int coluna) {
+
+	if (tabuleiroBackEnd[linha][coluna] != VAZIO) {
+
+		if (tabuleiroBackEnd[linha][coluna] == PECA_SELECIONADA)
+		{
+			soltaPecaAposValidacoesExtras(tabuleiroBackEnd);
+
+			return VALIDACAO_CAPTURADA;
+		}
+		else
+		{
+			return VALIDACAO_ENCERRAR;
+		}
+	}
+
+	return VALIDACAO_CONTINUAR;
+}
