@@ -13,7 +13,7 @@ void PecaTorre::jogarComTorre(char** tabuleiroBackEnd) {
 			//avisos
 		}
 	}
-	else if(PecaBase::globalPecaBackupDoPonteiro != VAZIO && PecaBase::validarJogadaCorretaCapturaPecaExtras()) {
+	else if(PecaBase::globalPecaBackupDoPonteiro != VAZIO && PecaBase::validarJogadaCapturaPeca()) {
 
 		if (validarJogadaTorreCaptura(tabuleiroBackEnd)) {
 

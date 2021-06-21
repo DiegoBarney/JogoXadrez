@@ -52,6 +52,12 @@
 #define PECA_PRETA_PIAO 'H'
 
 
+//PECAS EVOLUCAO XADREZ
+#define PECA_TORRE 'M'
+#define PECA_CAVALO 'N'
+#define PECA_BISPO 'B'
+#define PECA_RAINHA 'V'
+
 #define VAZIO ' '
 #define PONTEIRO_DIRECIONAL '*'
 #define PECA_SELECIONADA 'X'

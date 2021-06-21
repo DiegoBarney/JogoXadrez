@@ -13,7 +13,7 @@ void PecaPiao::jogarComPiao(char** tabuleiroBackEnd) {
 			memcpy(PecaBase::globalAvisos, AVISOS_MOVIMENTO_INVALIDO_POSICAO_ERRADA, strlen(AVISOS_MOVIMENTO_INVALIDO_POSICAO_ERRADA) + 1);
 		}
 	}
-	else if (PecaBase::globalPecaBackupDoPonteiro != VAZIO && PecaBase::validarJogadaCorretaCapturaPecaExtras()) {
+	else if (PecaBase::globalPecaBackupDoPonteiro != VAZIO && PecaBase::validarJogadaCapturaPeca()) {
 
 		if (validarJogadaPiaoCaptura(tabuleiroBackEnd)) {
 
@@ -53,7 +53,7 @@ bool PecaPiao::validarJogadaPiaoPecaBranca(char** tabuleiroBackEnd) {
 
 	if ((PecaBase::globalLinhaPecaSelecionada - 1) == PecaBase::globalLinhaPonteiro && PecaBase::globalColunaPecaSelecionada == PecaBase::globalColunaPonteiro)
 	{
-		PecaBase::soltaPecaAposValidacoesExtras(tabuleiroBackEnd);
+		PecaBase::soltaPecaAposValidacoes(tabuleiroBackEnd);
 		return true;
 	}
 	return false;
@@ -63,7 +63,7 @@ bool PecaPiao::validarJogadaPiaoPecaPreta(char** tabuleiroBackEnd) {
 
 	if ((PecaBase::globalLinhaPecaSelecionada + 1) == PecaBase::globalLinhaPonteiro && PecaBase::globalColunaPecaSelecionada == PecaBase::globalColunaPonteiro)
 	{
-		PecaBase::soltaPecaAposValidacoesExtras(tabuleiroBackEnd);
+		PecaBase::soltaPecaAposValidacoes(tabuleiroBackEnd);
 		return true;
 	}
 
@@ -90,7 +90,7 @@ bool PecaPiao::validarJogadaPiaoPecaBrancaCaptura(char** tabuleiroBackEnd) {
 	if ((PecaBase::globalLinhaPecaSelecionada - 1) == PecaBase::globalLinhaPonteiro && (PecaBase::globalColunaPecaSelecionada - 1) == PecaBase::globalColunaPonteiro ||
 		(PecaBase::globalLinhaPecaSelecionada - 1) == PecaBase::globalLinhaPonteiro && (PecaBase::globalColunaPecaSelecionada + 1) == PecaBase::globalColunaPonteiro) {
 
-			PecaBase::soltaPecaAposValidacoesExtras(tabuleiroBackEnd);
+			PecaBase::soltaPecaAposValidacoes(tabuleiroBackEnd);
 
 			return true;
 	}
@@ -104,7 +104,7 @@ bool PecaPiao::validarJogadaPiaoPecaPretaCaptura(char** tabuleiroBackEnd) {
 	if ((PecaBase::globalLinhaPecaSelecionada + 1) == PecaBase::globalLinhaPonteiro && (PecaBase::globalColunaPecaSelecionada + 1) == PecaBase::globalColunaPonteiro ||
 		(PecaBase::globalLinhaPecaSelecionada + 1) == PecaBase::globalLinhaPonteiro && (PecaBase::globalColunaPecaSelecionada - 1) == PecaBase::globalColunaPonteiro) {
 
-			PecaBase::soltaPecaAposValidacoesExtras(tabuleiroBackEnd);
+			PecaBase::soltaPecaAposValidacoes(tabuleiroBackEnd);
 
 			return true;
 	}

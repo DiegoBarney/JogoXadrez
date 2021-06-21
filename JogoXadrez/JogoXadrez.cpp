@@ -81,11 +81,28 @@ bool JogoXadrez::ehGanhador() {
 	return false;
 }
 
+char imprimeSelecaoDePeca() {
+	return PECA_RAINHA;
+}
+
 void reorganizaDadosDasPecasAposSairDoJogo(char** tabuleiroBackEnd)
 {
 	PecaBase* pecaBase;
 	pecaBase = PecaBase::getInstance(tabuleiroBackEnd);
 	pecaBase->~PecaBase();
+}
+
+void verificaEvolucaoDaPecaPiao(char** tabuleiroBackEnd)
+{
+	char pecaSelecionadaParaEvolucao = VAZIO;
+	PecaBase* pecaBase;
+	pecaBase = PecaBase::getInstance(tabuleiroBackEnd);
+	
+	if (pecaBase->verificaSePiaoEstaProntoEvoluir(tabuleiroBackEnd))
+	{
+		pecaSelecionadaParaEvolucao = imprimeSelecaoDePeca();
+		pecaBase->evoluiPiao(tabuleiroBackEnd, pecaSelecionadaParaEvolucao);
+	}
 }
 
 int main() {
@@ -115,7 +132,7 @@ int main() {
 					tabuleiro.tabuleiroUserIterface(tabuleiroBackEnd);
 					TeclasCapturadasDoUsuario = TecladoJogo->capturaTeclado();
 					tabuleiro.movimentacaoNoTabuleiroBackEnd(tabuleiroBackEnd, TeclasCapturadasDoUsuario);
-
+					verificaEvolucaoDaPecaPiao(tabuleiroBackEnd);
 				}
 
 				reorganizaDadosDasPecasAposSairDoJogo(tabuleiroBackEnd);

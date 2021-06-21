@@ -33,12 +33,13 @@ public:
 	void pegaPeca(char** tabuleiroBackEnd);
 	void soltaPeca(char** tabuleiroBackEnd);
 	void cancelaJogada(char** tabuleiroBackEnd);
-	static bool validarJogadaCorretaCapturaPecaExtras();
-	static void soltaPecaAposValidacoesExtras(char** tabuleiroBackEnd);
+	static bool validarJogadaCapturaPeca();
+	static void soltaPecaAposValidacoes(char** tabuleiroBackEnd);
 	static int	validacoesDeCapturaPecaExtras(char** tabuleiroBackEnd, int linha, int coluna);
 	static void zerarInformacoes();
+	bool verificaSePiaoEstaProntoEvoluir(char** tabuleiroBackEnd);
+	void evoluiPiao(char** tabuleiroBackEnd, char novaPeca);
 
 private:
 	PecaBase(char** tabuleiroBackEnd);
-	void verificaSePiaoEvoluiu(char** tabuleiroBackEnd);
 };

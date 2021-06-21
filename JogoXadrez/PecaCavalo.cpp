@@ -13,7 +13,7 @@ void PecaCavalo::jogarComCavalo(char** tabuleiroBackEnd) {
 			//avisos
 		}
 	}
-	else if (PecaBase::globalPecaBackupDoPonteiro != VAZIO && PecaBase::validarJogadaCorretaCapturaPecaExtras()) {
+	else if (PecaBase::globalPecaBackupDoPonteiro != VAZIO && PecaBase::validarJogadaCapturaPeca()) {
 
 		if (validarJogadaCavaloCaptura(tabuleiroBackEnd)) {
 
@@ -86,7 +86,7 @@ bool PecaCavalo::validarJogadaCavaloEsquerdaAcima(char** tabuleiroBackEnd) {
 	{
 		if (tabuleiroBackEnd[linha][coluna] == PECA_SELECIONADA)
 		{
-			PecaBase::soltaPecaAposValidacoesExtras(tabuleiroBackEnd);
+			PecaBase::soltaPecaAposValidacoes(tabuleiroBackEnd);
 			return true;
 		}
 
@@ -99,7 +99,7 @@ bool PecaCavalo::validarJogadaCavaloEsquerdaAcima(char** tabuleiroBackEnd) {
 	{
 		if (tabuleiroBackEnd[linha][coluna] == PECA_SELECIONADA)
 		{
-			PecaBase::soltaPecaAposValidacoesExtras(tabuleiroBackEnd);
+			PecaBase::soltaPecaAposValidacoes(tabuleiroBackEnd);
 			return true;
 		}
 	}
@@ -116,7 +116,7 @@ bool PecaCavalo::validarJogadaCavaloEsquerdaAbaixo(char** tabuleiroBackEnd) {
 	{
 		if (tabuleiroBackEnd[linha][coluna] == PECA_SELECIONADA)
 		{
-			PecaBase::soltaPecaAposValidacoesExtras(tabuleiroBackEnd);
+			PecaBase::soltaPecaAposValidacoes(tabuleiroBackEnd);
 			return true;
 		}
 	}
@@ -128,7 +128,7 @@ bool PecaCavalo::validarJogadaCavaloEsquerdaAbaixo(char** tabuleiroBackEnd) {
 	{
 		if (tabuleiroBackEnd[linha][coluna] == PECA_SELECIONADA)
 		{
-			PecaBase::soltaPecaAposValidacoesExtras(tabuleiroBackEnd);
+			PecaBase::soltaPecaAposValidacoes(tabuleiroBackEnd);
 			return true;
 		}
 	}
@@ -145,7 +145,7 @@ bool PecaCavalo::validarJogadaCavaloDireitaAcima(char** tabuleiroBackEnd) {
 	{
 		if (tabuleiroBackEnd[linha][coluna] == PECA_SELECIONADA)
 		{
-			PecaBase::soltaPecaAposValidacoesExtras(tabuleiroBackEnd);
+			PecaBase::soltaPecaAposValidacoes(tabuleiroBackEnd);
 			return true;
 		}
 
@@ -158,7 +158,7 @@ bool PecaCavalo::validarJogadaCavaloDireitaAcima(char** tabuleiroBackEnd) {
 	{
 		if (tabuleiroBackEnd[linha][coluna] == PECA_SELECIONADA)
 		{
-			PecaBase::soltaPecaAposValidacoesExtras(tabuleiroBackEnd);
+			PecaBase::soltaPecaAposValidacoes(tabuleiroBackEnd);
 			return true;
 		}
 	}
@@ -175,7 +175,7 @@ bool PecaCavalo::validarJogadaCavaloDireitaAbaixo(char** tabuleiroBackEnd) {
 	{
 		if (tabuleiroBackEnd[linha][coluna] == PECA_SELECIONADA)
 		{
-			PecaBase::soltaPecaAposValidacoesExtras(tabuleiroBackEnd);
+			PecaBase::soltaPecaAposValidacoes(tabuleiroBackEnd);
 			return true;
 		}
 	}
@@ -187,7 +187,7 @@ bool PecaCavalo::validarJogadaCavaloDireitaAbaixo(char** tabuleiroBackEnd) {
 	{
 		if (tabuleiroBackEnd[linha][coluna] == PECA_SELECIONADA)
 		{
-			PecaBase::soltaPecaAposValidacoesExtras(tabuleiroBackEnd);
+			PecaBase::soltaPecaAposValidacoes(tabuleiroBackEnd);
 			return true;
 		}
 	}
