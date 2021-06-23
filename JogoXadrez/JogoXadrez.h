@@ -8,4 +8,9 @@ public:
 	void imprimeTutorial();
 	bool ehGanhador();
 	void capturaDadosJogador();
+	void reorganizaDadosDasPecasAposSairDoJogo(char** tabuleiroBackEnd);
+	void verificaEvolucaoDaPecaPiao(char** tabuleiroBackEnd);
+
+private:
+	char imprimeSelecaoDePecaParaEvolucao();
 };

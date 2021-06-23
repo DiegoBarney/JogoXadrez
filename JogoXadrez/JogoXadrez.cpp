@@ -81,26 +81,59 @@ bool JogoXadrez::ehGanhador() {
 	return false;
 }
 
-char imprimeSelecaoDePeca() {
+char JogoXadrez::imprimeSelecaoDePecaParaEvolucao() {
+	TecladoJogo* TecladoJogo = TecladoJogo::getInstance();
+	bool loop = true;
+	system("cls");
+	printf("\x1b[37m ############ Parabens, voce evoluiu seu Piao!!! ############\n\n");
+	printf("Pressione a tecla direcional up para virar Rainha\n");
+	printf("Pressione a tecla direcional left para virar Cavalo\n");
+	printf("Pressione a tecla direcional down para virar Bispo\n");
+	printf("Pressione a tecla direcional right para virar Torre\n");
+
+	while (loop) {
+
+		loop = false;
+
+		switch (TecladoJogo->capturaTeclado())
+		{
+		case TECLA_GAMEPLAY_DIRECIONAL_UP:
+			return PECA_RAINHA;
+			break;
+		case TECLA_GAMEPLAY_DIRECIONAL_LEFT:
+			return PECA_CAVALO;
+			break;
+		case TECLA_GAMEPLAY_DIRECIONAL_DOWN:
+			return PECA_BISPO;
+			break;
+		case TECLA_GAMEPLAY_DIRECIONAL_RIGHT:
+			return PECA_TORRE;
+			break;
+		default:
+			loop = true;
+			break;
+		}
+	}
+
 	return PECA_RAINHA;
 }
 
-void reorganizaDadosDasPecasAposSairDoJogo(char** tabuleiroBackEnd)
+void JogoXadrez::reorganizaDadosDasPecasAposSairDoJogo(char** tabuleiroBackEnd)
 {
 	PecaBase* pecaBase;
 	pecaBase = PecaBase::getInstance(tabuleiroBackEnd);
 	pecaBase->~PecaBase();
 }
 
-void verificaEvolucaoDaPecaPiao(char** tabuleiroBackEnd)
+void JogoXadrez::verificaEvolucaoDaPecaPiao(char** tabuleiroBackEnd)
 {
 	char pecaSelecionadaParaEvolucao = VAZIO;
 	PecaBase* pecaBase;
 	pecaBase = PecaBase::getInstance(tabuleiroBackEnd);
 	
-	if (pecaBase->verificaSePiaoEstaProntoEvoluir(tabuleiroBackEnd))
+	if (pecaBase->verificaSePiaoEstaProntoParaEvoluir(tabuleiroBackEnd))
 	{
-		pecaSelecionadaParaEvolucao = imprimeSelecaoDePeca();
+		pecaSelecionadaParaEvolucao = imprimeSelecaoDePecaParaEvolucao();
 		pecaBase->evoluiPiao(tabuleiroBackEnd, pecaSelecionadaParaEvolucao);
 	}
 }
@@ -132,10 +165,10 @@ int main() {
 					tabuleiro.tabuleiroUserIterface(tabuleiroBackEnd);
 					TeclasCapturadasDoUsuario = TecladoJogo->capturaTeclado();
 					tabuleiro.movimentacaoNoTabuleiroBackEnd(tabuleiroBackEnd, TeclasCapturadasDoUsuario);
-					verificaEvolucaoDaPecaPiao(tabuleiroBackEnd);
+					jogo.verificaEvolucaoDaPecaPiao(tabuleiroBackEnd);
 				}
 
-				reorganizaDadosDasPecasAposSairDoJogo(tabuleiroBackEnd);
+				jogo.reorganizaDadosDasPecasAposSairDoJogo(tabuleiroBackEnd);
 
 			break;
 

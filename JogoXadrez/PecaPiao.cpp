@@ -51,22 +51,27 @@ bool PecaPiao::validarJogadaPiao(char** tabuleiroBackEnd) {
 
 bool PecaPiao::validarJogadaPiaoPecaBranca(char** tabuleiroBackEnd) {
 
-	if ((PecaBase::globalLinhaPecaSelecionada - 1) == PecaBase::globalLinhaPonteiro && PecaBase::globalColunaPecaSelecionada == PecaBase::globalColunaPonteiro)
+	if (PecaBase::globalPecaSelecionada == PECA_BRANCA_PIAO)
 	{
-		PecaBase::soltaPecaAposValidacoes(tabuleiroBackEnd);
-		return true;
+		if ((PecaBase::globalLinhaPecaSelecionada - 1) == PecaBase::globalLinhaPonteiro && PecaBase::globalColunaPecaSelecionada == PecaBase::globalColunaPonteiro)
+		{
+			PecaBase::soltaPecaAposValidacoes(tabuleiroBackEnd);
+			return true;
+		}
 	}
 	return false;
 }
 
 bool PecaPiao::validarJogadaPiaoPecaPreta(char** tabuleiroBackEnd) {
 
-	if ((PecaBase::globalLinhaPecaSelecionada + 1) == PecaBase::globalLinhaPonteiro && PecaBase::globalColunaPecaSelecionada == PecaBase::globalColunaPonteiro)
+	if (PecaBase::globalPecaSelecionada == PECA_PRETA_PIAO) 
 	{
-		PecaBase::soltaPecaAposValidacoes(tabuleiroBackEnd);
-		return true;
+		if ((PecaBase::globalLinhaPecaSelecionada + 1) == PecaBase::globalLinhaPonteiro && PecaBase::globalColunaPecaSelecionada == PecaBase::globalColunaPonteiro)
+		{
+			PecaBase::soltaPecaAposValidacoes(tabuleiroBackEnd);
+			return true;
+		}
 	}
-
 	return false;
 }
 
@@ -86,27 +91,32 @@ bool PecaPiao::validarJogadaPiaoCaptura(char** tabuleiroBackEnd) {
 
 bool PecaPiao::validarJogadaPiaoPecaBrancaCaptura(char** tabuleiroBackEnd) {
 
-	//JOGADA DE CAPTURA ESQUERDA
-	if ((PecaBase::globalLinhaPecaSelecionada - 1) == PecaBase::globalLinhaPonteiro && (PecaBase::globalColunaPecaSelecionada - 1) == PecaBase::globalColunaPonteiro ||
-		(PecaBase::globalLinhaPecaSelecionada - 1) == PecaBase::globalLinhaPonteiro && (PecaBase::globalColunaPecaSelecionada + 1) == PecaBase::globalColunaPonteiro) {
+	if (PecaBase::globalPecaSelecionada == PECA_BRANCA_PIAO)
+	{
+		//JOGADA DE CAPTURA ESQUERDA
+		if ((PecaBase::globalLinhaPecaSelecionada - 1) == PecaBase::globalLinhaPonteiro && (PecaBase::globalColunaPecaSelecionada - 1) == PecaBase::globalColunaPonteiro ||
+			(PecaBase::globalLinhaPecaSelecionada - 1) == PecaBase::globalLinhaPonteiro && (PecaBase::globalColunaPecaSelecionada + 1) == PecaBase::globalColunaPonteiro) {
 
 			PecaBase::soltaPecaAposValidacoes(tabuleiroBackEnd);
 
 			return true;
+		}
 	}
-
-	memcpy(PecaBase::globalAvisos, AVISOS_MOVIMENTO_INVALIDO_POSICAO_ERRADA, strlen(AVISOS_MOVIMENTO_INVALIDO_POSICAO_ERRADA) + 1);
 	return false;
 }
 
 bool PecaPiao::validarJogadaPiaoPecaPretaCaptura(char** tabuleiroBackEnd) {
 
-	if ((PecaBase::globalLinhaPecaSelecionada + 1) == PecaBase::globalLinhaPonteiro && (PecaBase::globalColunaPecaSelecionada + 1) == PecaBase::globalColunaPonteiro ||
-		(PecaBase::globalLinhaPecaSelecionada + 1) == PecaBase::globalLinhaPonteiro && (PecaBase::globalColunaPecaSelecionada - 1) == PecaBase::globalColunaPonteiro) {
+	if (PecaBase::globalPecaSelecionada == PECA_PRETA_PIAO) 
+	{
+
+		if ((PecaBase::globalLinhaPecaSelecionada + 1) == PecaBase::globalLinhaPonteiro && (PecaBase::globalColunaPecaSelecionada + 1) == PecaBase::globalColunaPonteiro ||
+			(PecaBase::globalLinhaPecaSelecionada + 1) == PecaBase::globalLinhaPonteiro && (PecaBase::globalColunaPecaSelecionada - 1) == PecaBase::globalColunaPonteiro) {
 
 			PecaBase::soltaPecaAposValidacoes(tabuleiroBackEnd);
 
 			return true;
+		}
 	}
 	return false;
 }

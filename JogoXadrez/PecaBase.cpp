@@ -143,8 +143,7 @@ void PecaBase::soltaPeca(char** tabuleiroBackEnd) {
 		PecaRei rei;
 		rei.jogarComRei(tabuleiroBackEnd);
 	}
-
-	verificaSePiaoEstaProntoEvoluir(tabuleiroBackEnd);
+	verificaSePiaoEstaProntoParaEvoluir(tabuleiroBackEnd);
 }
 
 void PecaBase::cancelaJogada(char** tabuleiroBackEnd) {
@@ -161,7 +160,7 @@ void PecaBase::cancelaJogada(char** tabuleiroBackEnd) {
 	}
 }
 
-bool PecaBase::verificaSePiaoEstaProntoEvoluir(char** tabuleiroBackEnd) {
+bool PecaBase::verificaSePiaoEstaProntoParaEvoluir(char** tabuleiroBackEnd) {
 
 	for (int coluna = 0; coluna < (COLUNAS - 1); coluna++)
 	{
@@ -197,6 +196,8 @@ void PecaBase::evoluiPiao(char** tabuleiroBackEnd, char pecaNova) {
 			if (pecaNova == PECA_RAINHA)
 				globalPecaBackupDoPonteiro = PECA_BRANCA_RAINHA;
 
+			//Atualizo a nova peca no tabuleiro
+			tabuleiroBackEnd[globalLinhaPonteiro][globalColunaPonteiro] = globalPecaBackupDoPonteiro;
 			return;
 		}
 		
@@ -215,6 +216,8 @@ void PecaBase::evoluiPiao(char** tabuleiroBackEnd, char pecaNova) {
 			if (pecaNova == PECA_RAINHA)
 				globalPecaBackupDoPonteiro = PECA_PRETA_RAINHA;
 
+			//Atualizo a nova peca no tabuleiro
+			tabuleiroBackEnd[globalLinhaPonteiro][globalColunaPonteiro] = globalPecaBackupDoPonteiro;
 			return;
 		}
 	}
