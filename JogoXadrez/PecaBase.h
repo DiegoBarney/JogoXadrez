@@ -37,8 +37,8 @@ public:
 	static void soltaPecaAposValidacoes(char** tabuleiroBackEnd);
 	static int	validacoesDeCapturaPecaExtras(char** tabuleiroBackEnd, int linha, int coluna);
 	static void zerarInformacoes();
-	bool verificaSePiaoEstaProntoParaEvoluir(char** tabuleiroBackEnd);
-	void evoluiPiao(char** tabuleiroBackEnd, char novaPeca);
+	bool verificaSePeaoEstaProntoParaEvoluir(char** tabuleiroBackEnd);
+	void evoluiPeao(char** tabuleiroBackEnd, char novaPeca);
 
 private:
 	PecaBase(char** tabuleiroBackEnd);

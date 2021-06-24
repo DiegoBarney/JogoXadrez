@@ -9,7 +9,7 @@ public:
 	bool ehGanhador();
 	void capturaDadosJogador();
 	void reorganizaDadosDasPecasAposSairDoJogo(char** tabuleiroBackEnd);
-	void verificaEvolucaoDaPecaPiao(char** tabuleiroBackEnd);
+	void verificaEvolucaoDaPecaPeao(char** tabuleiroBackEnd);
 
 private:
 	char imprimeSelecaoDePecaParaEvolucao();

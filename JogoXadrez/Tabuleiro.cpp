@@ -40,10 +40,10 @@ char** Tabuleiro::organizaTabuleiroBackEndIncial() {
 					
 			}
 			else if (linha == 1) {
-					matriz[linha][coluna] = PECA_PRETA_PIAO;
+					matriz[linha][coluna] = PECA_PRETA_PEAO;
 			}
 			else if (linha == 6) {
-				matriz[linha][coluna] = PECA_BRANCA_PIAO;
+				matriz[linha][coluna] = PECA_BRANCA_PEAO;
 			}
 			else if (linha == 7) {
 
@@ -118,7 +118,7 @@ void Tabuleiro::tabuleiroUserIterface(char** tabuleiroBackEnd) {
 					printf("\x1b[37m    RE   ");
 
 				}
-				else if (tabuleiroBackEnd[linhasInterface - descontoLinhasInterfaceMatriz][colunasInterface] == PECA_BRANCA_PIAO) {
+				else if (tabuleiroBackEnd[linhasInterface - descontoLinhasInterfaceMatriz][colunasInterface] == PECA_BRANCA_PEAO) {
 					printf("\x1b[37m    PI   ");
 
 				}
@@ -142,7 +142,7 @@ void Tabuleiro::tabuleiroUserIterface(char** tabuleiroBackEnd) {
 					printf("\x1b[34m    RE   ");
 
 				}
-				else if (tabuleiroBackEnd[linhasInterface - descontoLinhasInterfaceMatriz][colunasInterface] == PECA_PRETA_PIAO) {
+				else if (tabuleiroBackEnd[linhasInterface - descontoLinhasInterfaceMatriz][colunasInterface] == PECA_PRETA_PEAO) {
 					printf("\x1b[34m    PI   ");
 
 				}

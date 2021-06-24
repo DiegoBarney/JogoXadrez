@@ -35,7 +35,7 @@ void JogoXadrez::imprimeTutorial()
 	printf("Passo 4: Repetir o processo para todas as jogadas.\n");
 
 	printf("\n\n\x1b[31mSignificados de siglas do jogo:\n");
-	printf("\x1b[37mPI = Piao.\n");
+	printf("\x1b[37mPI = Peao.\n");
 	printf("TO = Torre.\n");
 	printf("CA = Cavalo.\n");
 	printf("BI = Bispo.\n");
@@ -85,7 +85,7 @@ char JogoXadrez::imprimeSelecaoDePecaParaEvolucao() {
 	TecladoJogo* TecladoJogo = TecladoJogo::getInstance();
 	bool loop = true;
 	system("cls");
-	printf("\x1b[37m ############ Parabens, voce evoluiu seu Piao!!! ############\n\n");
+	printf("\x1b[37m ############ Parabens, voce evoluiu seu Peao!!! ############\n\n");
 	printf("Pressione a tecla direcional up para virar Rainha\n");
 	printf("Pressione a tecla direcional left para virar Cavalo\n");
 	printf("Pressione a tecla direcional down para virar Bispo\n");
@@ -125,16 +125,16 @@ void JogoXadrez::reorganizaDadosDasPecasAposSairDoJogo(char** tabuleiroBackEnd)
 	pecaBase->~PecaBase();
 }
 
-void JogoXadrez::verificaEvolucaoDaPecaPiao(char** tabuleiroBackEnd)
+void JogoXadrez::verificaEvolucaoDaPecaPeao(char** tabuleiroBackEnd)
 {
 	char pecaSelecionadaParaEvolucao = VAZIO;
 	PecaBase* pecaBase;
 	pecaBase = PecaBase::getInstance(tabuleiroBackEnd);
 	
-	if (pecaBase->verificaSePiaoEstaProntoParaEvoluir(tabuleiroBackEnd))
+	if (pecaBase->verificaSePeaoEstaProntoParaEvoluir(tabuleiroBackEnd))
 	{
 		pecaSelecionadaParaEvolucao = imprimeSelecaoDePecaParaEvolucao();
-		pecaBase->evoluiPiao(tabuleiroBackEnd, pecaSelecionadaParaEvolucao);
+		pecaBase->evoluiPeao(tabuleiroBackEnd, pecaSelecionadaParaEvolucao);
 	}
 }
 
@@ -165,7 +165,7 @@ int main() {
 					tabuleiro.tabuleiroUserIterface(tabuleiroBackEnd);
 					TeclasCapturadasDoUsuario = TecladoJogo->capturaTeclado();
 					tabuleiro.movimentacaoNoTabuleiroBackEnd(tabuleiroBackEnd, TeclasCapturadasDoUsuario);
-					jogo.verificaEvolucaoDaPecaPiao(tabuleiroBackEnd);
+					jogo.verificaEvolucaoDaPecaPeao(tabuleiroBackEnd);
 				}
 
 				jogo.reorganizaDadosDasPecasAposSairDoJogo(tabuleiroBackEnd);

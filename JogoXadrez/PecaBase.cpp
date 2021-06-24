@@ -1,5 +1,5 @@
 #include "PecaBase.h"
-#include "PecaPiao.h"
+#include "PecaPeao.h"
 #include "PecaBispo.h"
 #include "PecaTorre.h"
 #include "PecaCavalo.h"
@@ -108,10 +108,10 @@ void PecaBase::pegaPeca(char** tabuleiroBackEnd) {
 
 void PecaBase::soltaPeca(char** tabuleiroBackEnd) {
 
-	if (globalPecaSelecionada == PECA_PRETA_PIAO || globalPecaSelecionada == PECA_BRANCA_PIAO)
+	if (globalPecaSelecionada == PECA_PRETA_PEAO || globalPecaSelecionada == PECA_BRANCA_PEAO)
 	{
-		PecaPiao piao;
-		piao.jogarComPiao(tabuleiroBackEnd);
+		PecaPeao Peao;
+		Peao.jogarComPeao(tabuleiroBackEnd);
 	}
 
 	if (globalPecaSelecionada == PECA_BRANCA_BISPO || globalPecaSelecionada == PECA_PRETA_BISPO)
@@ -143,7 +143,7 @@ void PecaBase::soltaPeca(char** tabuleiroBackEnd) {
 		PecaRei rei;
 		rei.jogarComRei(tabuleiroBackEnd);
 	}
-	verificaSePiaoEstaProntoParaEvoluir(tabuleiroBackEnd);
+	verificaSePeaoEstaProntoParaEvoluir(tabuleiroBackEnd);
 }
 
 void PecaBase::cancelaJogada(char** tabuleiroBackEnd) {
@@ -160,11 +160,11 @@ void PecaBase::cancelaJogada(char** tabuleiroBackEnd) {
 	}
 }
 
-bool PecaBase::verificaSePiaoEstaProntoParaEvoluir(char** tabuleiroBackEnd) {
+bool PecaBase::verificaSePeaoEstaProntoParaEvoluir(char** tabuleiroBackEnd) {
 
 	for (int coluna = 0; coluna < (COLUNAS - 1); coluna++)
 	{
-		if (tabuleiroBackEnd[0][coluna] == PECA_BRANCA_PIAO)
+		if (tabuleiroBackEnd[0][coluna] == PECA_BRANCA_PEAO)
 		{
 			return true;
 		}
@@ -172,7 +172,7 @@ bool PecaBase::verificaSePiaoEstaProntoParaEvoluir(char** tabuleiroBackEnd) {
 
 	for (int coluna = 0; coluna < (COLUNAS - 1); coluna++)
 	{
-		if (tabuleiroBackEnd[7][coluna] == PECA_PRETA_PIAO)
+		if (tabuleiroBackEnd[7][coluna] == PECA_PRETA_PEAO)
 		{
 			return true;
 		}
@@ -181,11 +181,11 @@ bool PecaBase::verificaSePiaoEstaProntoParaEvoluir(char** tabuleiroBackEnd) {
 	return false;
 }
 
-void PecaBase::evoluiPiao(char** tabuleiroBackEnd, char pecaNova) {
+void PecaBase::evoluiPeao(char** tabuleiroBackEnd, char pecaNova) {
 
 	for (int coluna = 0; coluna < (COLUNAS - 1); coluna++)
 	{
-		if (tabuleiroBackEnd[0][coluna] == PECA_BRANCA_PIAO)
+		if (tabuleiroBackEnd[0][coluna] == PECA_BRANCA_PEAO)
 		{
 			if (pecaNova == PECA_TORRE)
 				globalPecaBackupDoPonteiro = PECA_BRANCA_TORRE;
@@ -205,7 +205,7 @@ void PecaBase::evoluiPiao(char** tabuleiroBackEnd, char pecaNova) {
 
 	for (int coluna = 0; coluna < (COLUNAS - 1); coluna++)
 	{
-		if (tabuleiroBackEnd[7][coluna] == PECA_PRETA_PIAO)
+		if (tabuleiroBackEnd[7][coluna] == PECA_PRETA_PEAO)
 		{
 			if (pecaNova == PECA_TORRE)
 				globalPecaBackupDoPonteiro = PECA_PRETA_TORRE;
@@ -246,17 +246,17 @@ bool PecaBase::validarJogadaCapturaPeca() {
 
 	//JOGADA BRANCA
 	if (((globalPecaBackupDoPonteiro == PECA_PRETA_TORRE || globalPecaBackupDoPonteiro == PECA_PRETA_CAVALO || globalPecaBackupDoPonteiro == PECA_PRETA_BISPO ||
-		globalPecaBackupDoPonteiro == PECA_PRETA_RAINHA || globalPecaBackupDoPonteiro == PECA_PRETA_REI || globalPecaBackupDoPonteiro == PECA_PRETA_PIAO)
+		globalPecaBackupDoPonteiro == PECA_PRETA_RAINHA || globalPecaBackupDoPonteiro == PECA_PRETA_REI || globalPecaBackupDoPonteiro == PECA_PRETA_PEAO)
 
 		&& (globalPecaSelecionada == PECA_BRANCA_TORRE || globalPecaSelecionada == PECA_BRANCA_CAVALO || globalPecaSelecionada == PECA_BRANCA_BISPO ||
-			globalPecaSelecionada == PECA_BRANCA_RAINHA || globalPecaSelecionada == PECA_BRANCA_REI || globalPecaSelecionada == PECA_BRANCA_PIAO)) ||
+			globalPecaSelecionada == PECA_BRANCA_RAINHA || globalPecaSelecionada == PECA_BRANCA_REI || globalPecaSelecionada == PECA_BRANCA_PEAO)) ||
 
 		//JOGADA PRETA
 		((globalPecaBackupDoPonteiro == PECA_BRANCA_TORRE || globalPecaBackupDoPonteiro == PECA_BRANCA_CAVALO || globalPecaBackupDoPonteiro == PECA_BRANCA_BISPO ||
-			globalPecaBackupDoPonteiro == PECA_BRANCA_RAINHA || globalPecaBackupDoPonteiro == PECA_BRANCA_REI || globalPecaBackupDoPonteiro == PECA_BRANCA_PIAO)
+			globalPecaBackupDoPonteiro == PECA_BRANCA_RAINHA || globalPecaBackupDoPonteiro == PECA_BRANCA_REI || globalPecaBackupDoPonteiro == PECA_BRANCA_PEAO)
 
 			&& (globalPecaSelecionada == PECA_PRETA_TORRE || globalPecaSelecionada == PECA_PRETA_CAVALO || globalPecaSelecionada == PECA_PRETA_BISPO ||
-				globalPecaSelecionada == PECA_PRETA_RAINHA || globalPecaSelecionada == PECA_PRETA_REI || globalPecaSelecionada == PECA_PRETA_PIAO))) {
+				globalPecaSelecionada == PECA_PRETA_RAINHA || globalPecaSelecionada == PECA_PRETA_REI || globalPecaSelecionada == PECA_PRETA_PEAO))) {
 
 		return true;
 	}

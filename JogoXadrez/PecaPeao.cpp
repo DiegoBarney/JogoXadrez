@@ -1,11 +1,11 @@
-#include "PecaPiao.h"
+#include "PecaPeao.h"
 #include "PecaBase.h"
 
-void PecaPiao::jogarComPiao(char** tabuleiroBackEnd) {
+void PecaPeao::jogarComPeao(char** tabuleiroBackEnd) {
 
 	if (PecaBase::globalPecaBackupDoPonteiro == VAZIO)
 	{
-		if (validarJogadaPiao(tabuleiroBackEnd))
+		if (validarJogadaPeao(tabuleiroBackEnd))
 		{
 			return;
 		}
@@ -15,9 +15,9 @@ void PecaPiao::jogarComPiao(char** tabuleiroBackEnd) {
 	}
 	else if (PecaBase::globalPecaBackupDoPonteiro != VAZIO && PecaBase::validarJogadaCapturaPeca()) {
 
-		if (validarJogadaPiaoCaptura(tabuleiroBackEnd)) {
+		if (validarJogadaPeaoCaptura(tabuleiroBackEnd)) {
 
-			if (PecaBase::globalPecaBackupDoPonteiro == PECA_PRETA_PIAO)
+			if (PecaBase::globalPecaBackupDoPonteiro == PECA_PRETA_PEAO)
 				PecaBase::globalPlacarPretas++;
 			else
 				PecaBase::globalPlacarBrancas++;
@@ -34,11 +34,11 @@ void PecaPiao::jogarComPiao(char** tabuleiroBackEnd) {
 
 }
 
-bool PecaPiao::validarJogadaPiao(char** tabuleiroBackEnd) {
+bool PecaPeao::validarJogadaPeao(char** tabuleiroBackEnd) {
 
-	if (!validarJogadaPiaoPecaBranca(tabuleiroBackEnd)) {
+	if (!validarJogadaPeaoPecaBranca(tabuleiroBackEnd)) {
 
-		if (validarJogadaPiaoPecaPreta(tabuleiroBackEnd))
+		if (validarJogadaPeaoPecaPreta(tabuleiroBackEnd))
 			return true;
 	}
 	else
@@ -49,9 +49,9 @@ bool PecaPiao::validarJogadaPiao(char** tabuleiroBackEnd) {
 	return false;		
 }
 
-bool PecaPiao::validarJogadaPiaoPecaBranca(char** tabuleiroBackEnd) {
+bool PecaPeao::validarJogadaPeaoPecaBranca(char** tabuleiroBackEnd) {
 
-	if (PecaBase::globalPecaSelecionada == PECA_BRANCA_PIAO)
+	if (PecaBase::globalPecaSelecionada == PECA_BRANCA_PEAO)
 	{
 		if ((PecaBase::globalLinhaPecaSelecionada - 1) == PecaBase::globalLinhaPonteiro && PecaBase::globalColunaPecaSelecionada == PecaBase::globalColunaPonteiro)
 		{
@@ -62,9 +62,9 @@ bool PecaPiao::validarJogadaPiaoPecaBranca(char** tabuleiroBackEnd) {
 	return false;
 }
 
-bool PecaPiao::validarJogadaPiaoPecaPreta(char** tabuleiroBackEnd) {
+bool PecaPeao::validarJogadaPeaoPecaPreta(char** tabuleiroBackEnd) {
 
-	if (PecaBase::globalPecaSelecionada == PECA_PRETA_PIAO) 
+	if (PecaBase::globalPecaSelecionada == PECA_PRETA_PEAO) 
 	{
 		if ((PecaBase::globalLinhaPecaSelecionada + 1) == PecaBase::globalLinhaPonteiro && PecaBase::globalColunaPecaSelecionada == PecaBase::globalColunaPonteiro)
 		{
@@ -75,11 +75,11 @@ bool PecaPiao::validarJogadaPiaoPecaPreta(char** tabuleiroBackEnd) {
 	return false;
 }
 
-bool PecaPiao::validarJogadaPiaoCaptura(char** tabuleiroBackEnd) {
+bool PecaPeao::validarJogadaPeaoCaptura(char** tabuleiroBackEnd) {
 
-	if (!validarJogadaPiaoPecaPretaCaptura(tabuleiroBackEnd))
+	if (!validarJogadaPeaoPecaPretaCaptura(tabuleiroBackEnd))
 	{
-		if (validarJogadaPiaoPecaBrancaCaptura(tabuleiroBackEnd))
+		if (validarJogadaPeaoPecaBrancaCaptura(tabuleiroBackEnd))
 			return true;
 	}
 	else {
@@ -89,9 +89,9 @@ bool PecaPiao::validarJogadaPiaoCaptura(char** tabuleiroBackEnd) {
 	return false;
 }
 
-bool PecaPiao::validarJogadaPiaoPecaBrancaCaptura(char** tabuleiroBackEnd) {
+bool PecaPeao::validarJogadaPeaoPecaBrancaCaptura(char** tabuleiroBackEnd) {
 
-	if (PecaBase::globalPecaSelecionada == PECA_BRANCA_PIAO)
+	if (PecaBase::globalPecaSelecionada == PECA_BRANCA_PEAO)
 	{
 		//JOGADA DE CAPTURA ESQUERDA
 		if ((PecaBase::globalLinhaPecaSelecionada - 1) == PecaBase::globalLinhaPonteiro && (PecaBase::globalColunaPecaSelecionada - 1) == PecaBase::globalColunaPonteiro ||
@@ -105,9 +105,9 @@ bool PecaPiao::validarJogadaPiaoPecaBrancaCaptura(char** tabuleiroBackEnd) {
 	return false;
 }
 
-bool PecaPiao::validarJogadaPiaoPecaPretaCaptura(char** tabuleiroBackEnd) {
+bool PecaPeao::validarJogadaPeaoPecaPretaCaptura(char** tabuleiroBackEnd) {
 
-	if (PecaBase::globalPecaSelecionada == PECA_PRETA_PIAO) 
+	if (PecaBase::globalPecaSelecionada == PECA_PRETA_PEAO) 
 	{
 
 		if ((PecaBase::globalLinhaPecaSelecionada + 1) == PecaBase::globalLinhaPonteiro && (PecaBase::globalColunaPecaSelecionada + 1) == PecaBase::globalColunaPonteiro ||
